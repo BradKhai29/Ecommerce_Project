@@ -11,7 +11,7 @@ public interface IDao<T> {
     
     Optional<T> get(int id);
     
-    Map<String, T> getAll();
+    Map<Integer, T> getAll();
     
     void insert(T obj);
     

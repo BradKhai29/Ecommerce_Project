@@ -14,7 +14,7 @@ import java.util.Optional;
  * @author This PC
  */
 public class ProductDAO extends model.DAO.BaseDAO<Product>{
-    private static String SELECT_ALL = "SELECT productName, price, p.priceCode, imgURL, details, available "
+    private static String SELECT_ALL = "SELECT productID, productName, price, p.priceCode, imgURL, details, available "
                                      + "FROM Product p INNER JOIN ProductPrice pp ON p.priceCode = pp.priceCode";
     
     private static String SELECT =  "SELECT productName, price, p.priceCode, imgURL, details, available \n" +
@@ -38,8 +38,8 @@ public class ProductDAO extends model.DAO.BaseDAO<Product>{
     }
 
     @Override
-    public Map<String, Product> getAll() {
-        Map<String, Product> products = new HashMap<>();
+    public Map<Integer, Product> getAll() {
+        Map<Integer, Product> products = new HashMap<>();
         openQuery(SELECT_ALL);
         
         try {
@@ -47,7 +47,16 @@ public class ProductDAO extends model.DAO.BaseDAO<Product>{
             
             while(resultSet.next())
             {
+                int productID = resultSet.getInt("productID");
+                String productName = resultSet.getString("productName");
+                int price = resultSet.getInt("price");
+                int priceCode = resultSet.getInt("p.priceCode");
+                String imgURL = resultSet.getString("imgURL");
+                String details = resultSet.getString("details");
+                boolean available = resultSet.getBoolean("available");
                 
+                Product product = new Product(productID, productName, imgURL, price, priceCode, details, available);
+                products.put(productID, product);
             }
         } catch (Exception e) {
             e.printStackTrace();
