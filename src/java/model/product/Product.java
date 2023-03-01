@@ -9,7 +9,7 @@ package model.product;
  * @author This PC
  */
 public class Product {
-    private final static StringBuffer contextPath = new StringBuffer("product/");
+    private final static String contextPath = "product/";
     
     int productID;
     String productName;
@@ -49,7 +49,7 @@ public class Product {
     }
 
     public String getImgURL() {
-        return contextPath.append(imgURL).toString();
+        return contextPath.concat(imgURL);
     }
 
     public void setImgURL(String imgURL) {

@@ -3,8 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/model/DAO/BaseDAO.java</file>
-            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/model/product/Product.java</file>
+            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/web/home.jsp</file>
+            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/webpage_tools/WebPageEnum.java</file>
+            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/controller/product/ProductServlet.java</file>
             <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/model/product/ProductDAO.java</file>
         </group>
     </open-files>

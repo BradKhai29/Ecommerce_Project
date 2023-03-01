@@ -47,6 +47,7 @@ public class ProductDAO extends model.DAO.BaseDAO<Product>{
 
     @Override
     public Map<Integer, Product> getAll() {
+        System.out.println("DO query");
         Map<Integer, Product> products = new HashMap<>();
         openConnection();
         openQuery(SELECT_ALL);

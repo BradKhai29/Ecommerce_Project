@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,9 +27,18 @@ public class ProductServlet extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("Serve at Product servlet");
+        
         ServletContext servletContext = getServletContext();
-        Map<Integer, Product> products = new ProductDAO().getAll();
-        servletContext.setAttribute("products", products);
+        
+        Map<Integer, Product> products = (Map<Integer, Product>) servletContext.getAttribute("products");
+        if(products == null) 
+        {
+            products = new ProductDAO().getAll();
+            servletContext.setAttribute("products", products);
+        }
+        
+        servletContext.setAttribute("root", servletContext.getContextPath());
         
         response.sendRedirect(webpage_tools.WebPageEnum.HOME.getURL());
     }
