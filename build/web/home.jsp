@@ -16,7 +16,6 @@
     </head>
     <body>
         <h1>home page</h1>
-        <img src="product/kiem_katana/kiem_kanao.png" alt="alt"/>
         <div class="container">
             <div class="row">
                 Display products map here:

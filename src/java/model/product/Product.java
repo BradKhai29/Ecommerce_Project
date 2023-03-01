@@ -8,9 +8,7 @@ package model.product;
  *
  * @author This PC
  */
-public class Product {
-    private final static String contextPath = "product/";
-    
+public class Product {    
     int productID;
     String productName;
     String imgURL;
@@ -23,9 +21,10 @@ public class Product {
     }
 
     public Product(int productID, String productName, String imgURL, int price, int priceCode, String details, boolean available) {
+        StringBuffer contextPath = new StringBuffer("product/");        
         this.productID = productID;
         this.productName = productName;
-        this.imgURL = imgURL;
+        this.imgURL = contextPath.append(imgURL).toString();
         this.price = price;
         this.priceCode = priceCode;
         this.details = details;
@@ -49,7 +48,7 @@ public class Product {
     }
 
     public String getImgURL() {
-        return contextPath.concat(imgURL);
+        return imgURL;
     }
 
     public void setImgURL(String imgURL) {
