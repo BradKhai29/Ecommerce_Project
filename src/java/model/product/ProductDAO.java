@@ -4,6 +4,7 @@
  */
 package model.product;
 
+import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -39,6 +40,21 @@ public class ProductDAO extends model.DAO.BaseDAO<Product>{
     @Override
     public Map<String, Product> getAll() {
         Map<String, Product> products = new HashMap<>();
+        openQuery(SELECT_ALL);
+        
+        try {
+            ResultSet resultSet = query.executeQuery();
+            
+            while(resultSet.next())
+            {
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        closeQuery();
+        closeConnection();
         return products;
     }
 

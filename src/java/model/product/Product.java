@@ -9,23 +9,25 @@ package model.product;
  * @author This PC
  */
 public class Product {
-    private final static String contextPath = "product/";
+    private final static StringBuffer contextPath = new StringBuffer("product/");
     
     int productID;
     String productName;
     String imgURL;
     int price;
+    int priceCode;
     String details;
     boolean available;
 
     public Product() {
     }
 
-    public Product(int productID, String productName, String imgURL, int price, String details, boolean available) {
+    public Product(int productID, String productName, String imgURL, int price, int priceCode, String details, boolean available) {
         this.productID = productID;
         this.productName = productName;
         this.imgURL = imgURL;
         this.price = price;
+        this.priceCode = priceCode;
         this.details = details;
         this.available = available;
     }
@@ -47,7 +49,7 @@ public class Product {
     }
 
     public String getImgURL() {
-        return imgURL;
+        return contextPath.append(imgURL).toString();
     }
 
     public void setImgURL(String imgURL) {
@@ -60,6 +62,14 @@ public class Product {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getPriceCode() {
+        return priceCode;
+    }
+
+    public void setPriceCode(int priceCode) {
+        this.priceCode = priceCode;
     }
 
     public String getDetails() {
