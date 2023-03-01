@@ -24,9 +24,9 @@ public interface IDao<T> {
     void update(int id, String updateField, String updateValue);
     
     /**
-     * 
+     * This will follow the order of the parameter to update
      * @param id
-     * @param updateValue : String 
+     * @param updateValue : String array of Update Value
      */
     void update(int id, String... updateValue);
     
