@@ -14,7 +14,7 @@ import java.util.Optional;
  * @author This PC
  */
 public class ProductDAO extends model.DAO.BaseDAO<Product>{
-    private static String SELECT_ALL = "SELECT productID, productName, price, p.priceCode, imgURL, details, available "
+    private static String SELECT_ALL = "SELECT p.productID, productName, price, p.priceCode, imgURL, details, available "
                                      + "FROM Product p INNER JOIN ProductPrice pp ON p.priceCode = pp.priceCode";
     
     private static String SELECT =  "SELECT productName, price, p.priceCode, imgURL, details, available \n" +
@@ -23,12 +23,20 @@ public class ProductDAO extends model.DAO.BaseDAO<Product>{
     
     @Override
     protected void openQuery(String SQLQuery) {
-        
+        try {
+            query = DBConnection.prepareStatement(SELECT_ALL);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     protected void closeQuery() {
-    
+        try {
+            query.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -40,6 +48,7 @@ public class ProductDAO extends model.DAO.BaseDAO<Product>{
     @Override
     public Map<Integer, Product> getAll() {
         Map<Integer, Product> products = new HashMap<>();
+        openConnection();
         openQuery(SELECT_ALL);
         
         try {
@@ -50,7 +59,7 @@ public class ProductDAO extends model.DAO.BaseDAO<Product>{
                 int productID = resultSet.getInt("productID");
                 String productName = resultSet.getString("productName");
                 int price = resultSet.getInt("price");
-                int priceCode = resultSet.getInt("p.priceCode");
+                int priceCode = resultSet.getInt("priceCode");
                 String imgURL = resultSet.getString("imgURL");
                 String details = resultSet.getString("details");
                 boolean available = resultSet.getBoolean("available");

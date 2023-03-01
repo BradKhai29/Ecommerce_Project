@@ -6,12 +6,16 @@ package controller.product;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.product.Product;
+import model.product.ProductDAO;
 
 /**
  *
@@ -23,7 +27,10 @@ public class ProductServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ServletContext servletContext = getServletContext();
-        servletContext.setAttribute("products", request);
+        Map<Integer, Product> products = new ProductDAO().getAll();
+        servletContext.setAttribute("products", products);
+        
+        response.sendRedirect(webpage_tools.WebPageEnum.HOME.getURL());
     }
     
     @Override
