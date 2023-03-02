@@ -5,4 +5,4 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<jsp:forward page="product"></jsp:forward>
+<jsp:forward page="productLoad"></jsp:forward>

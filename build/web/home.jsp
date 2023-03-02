@@ -36,28 +36,37 @@
                             <div class="d-flex">
                                 <h2>
                                     <a href="#">
-                                    <span class="badge bg-secondary">Cart
-                                        <i class="fa-solid fa-cart-shopping"></i>
-                                    </span>
-                                </a>
+                                        <span class="badge bg-secondary">Cart
+                                            <i class="fa-solid fa-cart-shopping"></i>
+                                        </span>
+                                    </a>
                                 </h2>
                             </div>
                         </div>
                     </div>
                 </nav>
-                Display products map here:
                 <c:forEach var="product" items="${applicationScope.products}">
-                    <div class="card" style="width: 18rem;">
-                        <img src="${product.value.imgURL}" class="card-img-top" alt="image">
+                    <form class="card" style="width: 18rem;" method="post">
+                        <input type="hidden" name="productID" value="${product.key}">
+                        <button type="submit" formaction="${root}/productDetail">
+                            <img src="${root}/${product.value.imgURL}" class="card-img-top" alt="image">
+                        </button>    
                         <div class="card-body">
-                            <h5 class="card-title">${product.value.productName}</h5>
-                            <p class="card-text">${product.value.details}</p>
+                            <button type="submit" formaction="${root}/productDetail">
+                                <h5 class="card-title">Mô hình ${product.value.productName}</h5>
+                            </button>
+                            <p class="card-text">Mô tả ${product.value.details}</p>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">${product.value.price}</li>
+                                <li class="list-group-item">Loại sản phẩm: ${product.value.typeName}</li>
                             </ul>
-                            <a href="#" class="btn btn-primary">Go somewhere</a>
+
+                            <div class="d-flex">
+                                <button type="button" class="btn btn-primary btn-sm">Buy now</button>
+                                <button type="button" class="btn btn-secondary btn-sm">Add To Cart</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </c:forEach>
             </div>
         </div>

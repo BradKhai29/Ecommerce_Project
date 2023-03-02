@@ -4,31 +4,43 @@
  */
 package model.product;
 
+import java.util.Objects;
+
 /**
  *
  * @author This PC
  */
 public class Product {    
+    private static ProductTypeDAO productTypeDAO;
+    
     int productID;
     String productName;
     String imgURL;
     int price;
     int priceCode;
     String details;
-    boolean available;
+    int productStatus;
+    int typeID;
+    String typeName = "";
+    
+    static {
+       productTypeDAO = new ProductTypeDAO();
+    }
 
     public Product() {
     }
 
-    public Product(int productID, String productName, String imgURL, int price, int priceCode, String details, boolean available) {
-        StringBuffer contextPath = new StringBuffer("product/");        
+    public Product(int productID, String productName, String imgURL, int price, int priceCode, String details, int productStatus, int typeID) {
+        StringBuffer contextPath = new StringBuffer("product/");  
+        
         this.productID = productID;
         this.productName = productName;
         this.imgURL = contextPath.append(imgURL).toString();
         this.price = price;
         this.priceCode = priceCode;
         this.details = details;
-        this.available = available;
+        this.productStatus = productStatus;
+        this.typeID = typeID;
     }
 
     public int getProductID() {
@@ -79,11 +91,29 @@ public class Product {
         this.details = details;
     }
 
-    public boolean isAvailable() {
-        return available;
+    public int getProductStatus() {
+        return productStatus;
     }
 
-    public void setAvailable(boolean available) {
-        this.available = available;
+    public void setProductStatus(int productStatus) {
+        this.productStatus = productStatus;
+    }
+
+    public void setTypeID(int typeID) {
+        this.typeID = typeID;
+    }
+
+    public int getTypeID() {
+        return typeID;
+    }
+
+    public String getTypeName() {
+        if(typeName.equals("")) typeName = productTypeDAO.get(this.typeID).get().getTypeName();
+        return typeName;
+    }
+
+    @Override
+    public String toString() {
+        return ("product" + productName + ":" + productID + ":" + price + ":" + priceCode + ":" + details);
     }
 }

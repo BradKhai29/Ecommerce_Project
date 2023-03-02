@@ -22,8 +22,8 @@ import model.product.ProductDAO;
  *
  * @author This PC
  */
-@WebServlet(name = "ProductServlet", urlPatterns = {"/ProductServlet", "/product"})
-public class ProductServlet extends HttpServlet {
+@WebServlet(name = "ProductServlet", urlPatterns = {"/ProductServlet", "/productLoad"})
+public class ProductLoadServlet extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -31,12 +31,9 @@ public class ProductServlet extends HttpServlet {
         
         ServletContext servletContext = getServletContext();
         
-        Map<Integer, Product> products = (Map<Integer, Product>) servletContext.getAttribute("products");
-        if(products == null) 
-        {
-            products = new ProductDAO().getAll();
-            servletContext.setAttribute("products", products);
-        }
+        Map<Integer, Product> products = new ProductDAO().getAll(true);
+        
+        servletContext.setAttribute("products", products);
         
         servletContext.setAttribute("root", servletContext.getContextPath());
         

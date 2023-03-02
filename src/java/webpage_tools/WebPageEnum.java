@@ -11,7 +11,8 @@ package webpage_tools;
 public enum WebPageEnum {
     ROOT(""),
     HOME("home.jsp"),
-    ERROR_404("error404.jsp");
+    ERROR_404("error404.jsp"),
+    PRODUCT_DETAIL("product_detail.jsp");
     
     private static String contextPath = "/A_Ecommerce_Project/";
     private String URL;
@@ -42,7 +43,7 @@ public enum WebPageEnum {
             URLGenerater.append(prefix);
         }
             
-        URLGenerater.append(URL);
+        URLGenerater.append(this.URL);
         return URLGenerater.toString();
     }
     

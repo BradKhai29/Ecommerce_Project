@@ -33,6 +33,7 @@ public class ProductTypeDAO extends model.DAO.BaseDAO<ProductType>{
 
     @Override
     public Optional<ProductType> get(int id) {
+        if(productTypes.size() < 1) getAll();
         return Optional.of(productTypes.get(id));
     }
 

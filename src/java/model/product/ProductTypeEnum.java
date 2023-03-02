@@ -13,6 +13,7 @@ public enum ProductTypeEnum {
     ONEPIECE(2),
     CUNG_HOANG_DAO(3);
     
+    private static ProductTypeDAO productTypeDAO = new ProductTypeDAO();
     private int typeID;
 
     private ProductTypeEnum(int typeID) {
@@ -20,6 +21,6 @@ public enum ProductTypeEnum {
     }
     
     public String getTypeName(){
-        return "";
+        return productTypeDAO.get(this.typeID).get().getTypeName();
     }
 }
