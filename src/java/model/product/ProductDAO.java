@@ -71,7 +71,7 @@ public class ProductDAO extends model.DAO.BaseDAO<Product>{
                 int typeID  = resultSet.getInt("typeID");
                 
                 Product product = new Product(productID, productName, imgURL, price, priceCode, details, productStatus, typeID);
-                System.out.println(product);
+                //System.out.println(product);
                 
                 products.put(productID, product);
             }

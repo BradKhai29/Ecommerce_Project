@@ -27,17 +27,16 @@ public class ProductLoadServlet extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Serve at Product servlet");
+        System.out.println("Serve at [" + getServletName().concat("]"));
         
-        ServletContext servletContext = getServletContext();
-        
-        Map<Integer, Product> products = new ProductDAO().getAll(true);
-        
+        //Get the servlet context the set products as application scope
+        ServletContext servletContext = getServletContext();    
+        //get Products from productDAO
+        Map<Integer, Product> products = new ProductDAO().getAll(true);        
         servletContext.setAttribute("products", products);
-        
         servletContext.setAttribute("root", servletContext.getContextPath());
         
-        response.sendRedirect(webpage_tools.WebPageEnum.HOME.getURL());
+        response.sendRedirect(webpage_tools.WebPageEnum.ROOT.getURL());
     }
     
     @Override
