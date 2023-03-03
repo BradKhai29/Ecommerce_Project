@@ -2,7 +2,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <c:if test="${applicationScope.products == null}">
-    <jsp:forward page="productLoad"></jsp:forward>
+    <jsp:forward page="root"></jsp:forward>
 </c:if>
 <!DOCTYPE html>
 <html>
@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
     </head>
     <body>
+        Login page: ${applicationScope.login}
         <div class="container-fluid">
             <div class="row">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">

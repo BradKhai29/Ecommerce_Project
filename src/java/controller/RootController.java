@@ -2,40 +2,44 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.product;
+package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.product.Product;
-import model.product.ProductDAO;
+import webpage_tools.*;
 
 /**
  *
  * @author This PC
  */
-@WebServlet(name = "ProductServlet", urlPatterns = {"/ProductServlet", "/productLoad"})
-public class ProductLoadServlet extends HttpServlet {
-    
+@WebServlet(name = "RootController", urlPatterns = {"/RootController", "/root"})
+public class RootController extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Serve at [" + getServletName().concat("]"));
+        System.out.println("Served at [" + getServletInfo() + "]");
+        initURLs(request);
+        response.sendRedirect(ControllerEnum.PRODUCT_LOAD.getURL());
+    }
+    
+    private void initURLs(HttpServletRequest request)
+    {
+        ServletContext application = request.getServletContext();
+        application.setAttribute("root", application.getContextPath());
         
-        //Get the servlet context the set products as application scope
-        ServletContext servletContext = getServletContext();    
-        //get Products from productDAO
-        Map<Integer, Product> products = new ProductDAO().getAll(true);        
-        servletContext.setAttribute("products", products);
+        //Init the URLs
+        String loginPage = WebPageEnum.LOGIN_PAGE.getURL(FolderEnum.VIEW, FolderEnum.USER);
+        String registerPage = WebPageEnum.REGISTER_PAGE.getURL(FolderEnum.VIEW, FolderEnum.USER);
         
-        response.sendRedirect(webpage_tools.WebPageEnum.ROOT.getURL());
+        //Set URLS for applicationScope
+        application.setAttribute("login", loginPage);
+        application.setAttribute("register", registerPage);
     }
     
     @Override
@@ -43,18 +47,13 @@ public class ProductLoadServlet extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return getServletName();

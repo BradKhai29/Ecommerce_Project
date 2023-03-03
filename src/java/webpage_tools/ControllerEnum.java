@@ -10,7 +10,7 @@ package webpage_tools;
  */
 public enum ControllerEnum {
     ROOT(""),
-    PRODUCT("product");
+    PRODUCT_LOAD("productLoad");
     
     private static String contextPath = "/A_Ecommerce_Project/";
     private String URL;
