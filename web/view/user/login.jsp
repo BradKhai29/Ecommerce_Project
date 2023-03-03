@@ -16,44 +16,31 @@
     <body>
         <h1>LOGIN PAGE</h1>
         <div class="wrapper">
-            <div class="label-login">
-                <p>LOGIN</p>
-            </div>
             <div class="div-login">
-                <form action="<%=request.getContextPath()%>/login" method="post" name="frm-login" onsubmit = "return validateLogin()">
+                <form>
                     <table id="tbl-login">
-
                         <tr>
                             <td>User Name <span>*</span></td>
                             <td><input type="text" name="userName" id="userName"
-                                       placeholder="Enter user name" required ></td>
+                                       placeholder="Tên đăng nhập" required ></td>
                         </tr>
                         <tr>
                             <td>Password <span>*</span></td>
                             <td><input type="password" name="password" id="password"
-                                       placeholder="Enter password" required/></td>
+                                       placeholder="Mật khẩu" required/></td>
                         </tr>
                         <tr>
                             <td>\ <span>\</span></td>
                             <td>
                                 <input type="checkbox" name="remember" id="remember"/>
-                                <label for="remember">Remember me</label>
+                                <label for="remember">Ghi nhớ đăng nhập</label>
                             </td>
                         </tr>
                         <tr>
                             <td>
-                        <c:if var="result" test="${errorMessage != null}">
-                            <span class="error">${errorMessage}</span>
-                            <%
-                                session.removeAttribute("errorMessage");
-                            %>
-                        </c:if>
-                        </td>
-                        <td>
-                            <button type="submit"
-                                    name="login">Login</button>
-                            <a href = "${root}/" id = "link-register">Click here to Register</a>
-                        </td>
+                                <button type="submit" name="login">Đăng nhập</button>
+                                <a href = "${root}/registerPage" id = "link-register">Đăng kí tài khoản</a>
+                            </td>
                         </tr>
                     </table>
                 </form>

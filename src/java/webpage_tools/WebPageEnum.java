@@ -12,9 +12,9 @@ public enum WebPageEnum {
     ROOT(""),
     HOME("home.jsp"),
     ERROR_404("error404.jsp"),
-    PRODUCT_DETAIL("product_detail.jsp"),
-    LOGIN_PAGE("login.jsp"),
-    REGISTER_PAGE("register.jsp");
+    PRODUCT_DETAIL("product_detail_page"),
+    LOGIN_PAGE("loginPage"),
+    REGISTER_PAGE("registerPage");
     
     private static String contextPath = "/A_Ecommerce_Project/";
     private String URL;

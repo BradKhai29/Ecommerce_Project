@@ -2,25 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.product;
+package controller.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Optional;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.product.*;
-import webpage_tools.*;
 
 /**
  *
  * @author This PC
  */
-@WebServlet(name = "ProductDetailServlet", urlPatterns = {"/ProductDetailServlet", "/productDetail"})
-public class ProductDetailServlet extends HttpServlet {
+@WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterServlet", "/register"})
+public class RegisterServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,14 +30,8 @@ public class ProductDetailServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String productID = request.getParameter("productID");
-        ProductDAO productDAO = new ProductDAO();
-        Optional<Product> productOptional = productDAO.get(Integer.parseInt(productID));
+        response.setContentType("text/html;charset=UTF-8");
         
-        Product product = productOptional.orElse(new Product());
-        request.getSession().setAttribute("product", product);
-        
-        response.sendRedirect(WebPageEnum.PRODUCT_DETAIL.getURL());
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -23,9 +23,10 @@ public class DatabaseInformation {
     //Login process
     private static String user = "sa";
     private static String password = "123123";
+    private static String encodingProperty = "useUnicode=true;characterEncoding=UTF-8;";
 
     //Get Connection process
-    private static String url = "jdbc:sqlserver://localhost:" + port + ";databaseName=" + databaseName + ";encrypt=true;trustServerCertificate=true";
+    private static String url = "jdbc:sqlserver://localhost:" + port + ";databaseName=" + databaseName + ";encrypt=true;trustServerCertificate=true;" + encodingProperty;
 
     public static String getDriverName() {
         return driverName;

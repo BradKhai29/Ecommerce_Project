@@ -1,13 +1,84 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model.customer;
 
-/**
- *
- * @author This PC
- */
 public class Customer {
+    int userID;
+    String username;
+    String email;
+    String passwd;
+    
+    String fullname;
+    String phoneNumber;
+    String userAddress = "";
+    
+    //bỏ thêm thằng transaction map ở đây để hỗ trợ tính năng in lịch sử
+
+    public Customer() {
+    }
+
+    public Customer(int userID, String username, String email, String passwd, String fullname, String phoneNumber) {
+        this.userID = userID;
+        this.username = username;
+        this.email = email;
+        this.passwd = passwd;
+        this.fullname = fullname;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPasswd() {
+        return passwd;
+    }
+
+    public void setPasswd(String passwd) {
+        this.passwd = passwd;
+    }
+
+    public String getFullname() {
+        return fullname;
+    }
+
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getUserAddress() {
+        return userAddress;
+    }
+
+    public void setUserAddress(String userAddress) {
+        this.userAddress = userAddress;
+    }
+    
     
 }

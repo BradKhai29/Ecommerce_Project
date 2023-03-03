@@ -34,8 +34,8 @@ public class RootController extends HttpServlet {
         application.setAttribute("root", application.getContextPath());
         
         //Init the URLs
-        String loginPage = WebPageEnum.LOGIN_PAGE.getURL(FolderEnum.VIEW, FolderEnum.USER);
-        String registerPage = WebPageEnum.REGISTER_PAGE.getURL(FolderEnum.VIEW, FolderEnum.USER);
+        String loginPage = WebPageEnum.LOGIN_PAGE.getURL();
+        String registerPage = WebPageEnum.REGISTER_PAGE.getURL();
         
         //Set URLS for applicationScope
         application.setAttribute("login", loginPage);

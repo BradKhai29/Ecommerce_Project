@@ -4,9 +4,25 @@
         <servlet-name>loginPage</servlet-name>
         <jsp-file>/view/user/login.jsp</jsp-file>
     </servlet>
+    <servlet>
+        <servlet-name>registerPage</servlet-name>
+        <jsp-file>/view/user/register.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>productDetailPage</servlet-name>
+        <jsp-file>/view/main/product_detail.jsp</jsp-file>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginPage</servlet-name>
         <url-pattern>/loginPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>registerPage</servlet-name>
+        <url-pattern>/registerPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>productDetailPage</servlet-name>
+        <url-pattern>/product_detail_page</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -15,6 +15,8 @@ public class ProductTypeDAO extends model.DAO.BaseDAO<ProductType>{
     
     @Override
     protected void openQuery(String SQLQuery) {
+        openConnection();
+        
         try {
             query = DBConnection.prepareStatement(SQLQuery);
         } catch (Exception e) {
@@ -29,6 +31,8 @@ public class ProductTypeDAO extends model.DAO.BaseDAO<ProductType>{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        closeConnection();
     }
 
     @Override
@@ -40,7 +44,7 @@ public class ProductTypeDAO extends model.DAO.BaseDAO<ProductType>{
     @Override
     public Map<Integer, ProductType> getAll() {
         if(productTypes.size() > 1) return productTypes;
-        openConnection();
+
         openQuery(SELECT_ALL);
         
         try {
@@ -56,6 +60,8 @@ public class ProductTypeDAO extends model.DAO.BaseDAO<ProductType>{
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        closeQuery();
         return productTypes;
     }
 

@@ -14,10 +14,9 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
     </head>
     <body>
-        Login page: ${applicationScope.login}
         <div class="container-fluid">
             <div class="row">
-                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <div class="container">
                         <a class="navbar-brand" href="#">Navbar</a>
                         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,9 +33,17 @@
                             </ul>
                             <div class="d-flex">
                                 <h2>
+                                    <a href="${root}/loginPage" class="btn">
+                                        <h4>Login
+                                            <span class="badge bg-light text-dark">
+                                                <i class="fa-solid fa-circle-user"></i>
+                                            </span>
+                                        </h4>
+                                    </a>
                                     <a href="#">
                                         <span class="badge bg-secondary">Cart
                                             <i class="fa-solid fa-cart-shopping"></i>
+                                            <span class="badge bg-success">${temporaryCart == null ? "0" : temporaryCart}</span>
                                         </span>
                                     </a>
                                 </h2>

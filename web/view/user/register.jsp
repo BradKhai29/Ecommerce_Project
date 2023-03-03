@@ -14,7 +14,61 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     </head>
     <body>
-        <h1>Have Bootstrap</h1>
+        <div class="container">
+            <div class="div-register">
+                <form action="${root}/register" method="post"
+                      onsubmit="return validateRegister()" name="frm-register">
+
+                    <table id="tbl-register">
+                        <tr>
+                            <td>Full Name <span>*</span></td>
+                            <td><input type="text" name="fullname" id="fullname"
+                                       placeholder="Họ và tên quý khách" required/></td>
+                        </tr>
+                        <tr>
+                            <td>Phone number<span>*</span></td>
+                            <td><input type="text" name="phoneNumber" placeholder="Số điện thoại" required/></td>
+                        </tr>
+                        <tr>
+                            <td>Phone number<span>*</span></td>
+                            <td><input type="text" name="userAddress" placeholder="Địa chỉ (nếu có)"/></td>
+                        </tr>
+                        <tr>
+                            <td>Email <span>*</span></td>
+                            <td><input type="email" name="email" id="email"
+                                       placeholder="Email" required/></td>
+                        </tr>
+                        <tr>
+                            <td>User Name <span>*</span></td>
+                            <td><input type="text" name="userName" id="userName"
+                                       placeholder="Tên đăng nhập (Username)" required/></td>
+                        </tr>
+                        <tr>
+                            <td>Password <span>*</span></td>
+                            <td><input type="password" name="password" id="password"
+                                       placeholder="Mật khẩu (Password)" required/></td>
+                        </tr>
+
+                        <tr>
+                            <td>Confirm Password <span>*</span></td>
+                            <td><input type="password" name="confirmPassword"
+                                       id="confirmPassword" placeholder="Nhập lại mật khẩu" required/></td>
+                        </tr>
+                        <tr>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <button type="submit" name="register">Đăng ký</button> 
+                                <a href="${root}/loginPage" id="link-login">
+                                    Login nếu đã có tài khoản
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     </body>
 </html>
