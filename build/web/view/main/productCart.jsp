@@ -11,28 +11,36 @@
     <body>
         <div class="container-fluid">
             <div class="row">
-                <h1>PRODUCT CART PAGE</h1>
-                <c:if var="test" test="${sessionScope.temporaryCart != null}">
-                    <table class="table table-success">
-                        <thead>
-                            <tr>
-                                <th scope="col">Mã sản phẩm</th>
-                                <th scope="col">Hình ảnh</th>
-                                <th scope="col">Tên sản phẩm</th>
-                                <th scope="col">Đơn giá</th>
-                                <th scope="col">Số lượng</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </c:if>
+                <div class="container">
+                    <div class="row">
+                    <h1>PRODUCT CART PAGE</h1>
+                    <c:if var="test" test="${sessionScope.temporaryCart != null}">
+                        <table class="table table-success">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Mã sản phẩm</th>
+                                    <th scope="col">Hình ảnh</th>
+                                    <th scope="col">Tên sản phẩm</th>
+                                    <th scope="col">Đơn giá</th>
+                                    <th scope="col">Số lượng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="product" items="${temporaryCart.productCart}">
+                                    <tr>
+                                        <th scope="row">${product.key}</th>
+                                        <td><img class="img-fluid img-thumbnail w-25 h-25" src="${root}/${product.value.imgURL}" alt="productImg"></td>
+                                        <td>${product.value.productName}</td>
+                                        <td>${product.value.price}</td>
+                                        <td>${product.value.paymentQuantity}</td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </table>
+                        <a href="${root}" class="btn btn-primary">Trang Chủ</a>
+                    </c:if>
+                </div>
+                </div>
                 <div class="container">
                     <c:if var="test2" test="${sessionScope.temporaryCart == null}">
                         <div class="card">
@@ -40,9 +48,9 @@
                                 GIỎ HÀNG ĐANG TRỐNG
                             </div>
                             <div class="card-body">
-                              <h5 class="card-title">Quay lại trang chủ để tiếp tục mua hàng nha</h5>
-                              <p class="card-text">...</p>
-                              <a href="${root}" class="btn btn-primary">Trang Chủ</a>
+                                <h5 class="card-title">Quay lại trang chủ để tiếp tục mua hàng nha</h5>
+                                <p class="card-text">...</p>
+                                <a href="${root}" class="btn btn-primary">Trang Chủ</a>
                             </div>
                         </div>
                     </c:if>

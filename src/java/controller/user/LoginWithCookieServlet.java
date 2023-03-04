@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.customer.Customer;
+import webpage_tools.ControllerEnum;
 import webpage_tools.WebPageEnum;
 
 /**
@@ -29,7 +30,7 @@ public class LoginWithCookieServlet extends HttpServlet {
             throws ServletException, IOException {
         System.out.println("Served at [" + getServletInfo() + "]");
         HttpSession session = request.getSession(true);
-        session.setAttribute(SupportEnum.LOGIN_CHECKPOINT_COOKIE.getName(), "checkpoint");
+        session.setAttribute(SupportEnum.COOKIE_LOGIN_CHECKPOINT.getName(), "checkpoint");
         
         //Get the Cookie
         Optional<Customer> rememeberUser = processRemberUserCookie(request, response);
@@ -38,7 +39,8 @@ public class LoginWithCookieServlet extends HttpServlet {
             session.setAttribute(SupportEnum.CUSTOMER.getName(), rememeberUser.get());
         } 
         
-        response.sendRedirect(WebPageEnum.HOME.getURL());
+        //After load the User, redirect to load the temporary Cart
+        response.sendRedirect(ControllerEnum.TEMP_CART_LOAD.getURL());
     }
 
     @Override

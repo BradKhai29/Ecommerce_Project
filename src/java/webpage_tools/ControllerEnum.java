@@ -11,6 +11,7 @@ package webpage_tools;
 public enum ControllerEnum {
     ROOT(""),
     PRODUCT_LOAD("productLoad"),
+    TEMP_CART_LOAD("loadTempCart"),
     LOGIN("login");
     
     private static String contextPath = "/A_Ecommerce_Project/";

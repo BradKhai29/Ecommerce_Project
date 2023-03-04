@@ -15,6 +15,9 @@ import model.customer.Customer;
 import model.product.*;
 import webpage_tools.WebPageEnum;
 
+/**
+ * @code This Servlet is used for create temporaryCart and send temporaryCart cookie
+ */
 @WebServlet(name = "ProductCartServlet", urlPatterns = {"/ProductCartServlet", "/productCart"})
 public final class ProductCartServlet extends HttpServlet {
 
@@ -35,7 +38,9 @@ public final class ProductCartServlet extends HttpServlet {
             throws ServletException, IOException {
         System.out.println("Served at [" + getServletInfo() + "]");
         HttpSession session = request.getSession(true);
-
+        
+        String addToCart = request.getParameter("addToCart");
+        
         //get user
         Customer user = (Customer) session.getAttribute(SupportEnum.CUSTOMER.getName());
         boolean isLogin = user != null;
@@ -54,7 +59,8 @@ public final class ProductCartServlet extends HttpServlet {
         }
 
         session.setAttribute(SupportEnum.TEMPORARY_CART.getName(), temporaryCart);
-        response.sendRedirect(WebPageEnum.HOME.getURL());
+        if(addToCart != null) response.sendRedirect(WebPageEnum.HOME.getURL());
+        else response.sendRedirect(WebPageEnum.TEMP_CART.getURL());
     }
 
     @Override

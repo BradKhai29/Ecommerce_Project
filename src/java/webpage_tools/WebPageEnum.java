@@ -14,7 +14,8 @@ public enum WebPageEnum {
     ERROR_404("error404.jsp"),
     PRODUCT_DETAIL("product_detail_page"),
     LOGIN_PAGE("loginPage"),
-    REGISTER_PAGE("registerPage");
+    REGISTER_PAGE("registerPage"),
+    TEMP_CART("product_cart_page");
     
     private static String contextPath = "/A_Ecommerce_Project/";
     private String URL;

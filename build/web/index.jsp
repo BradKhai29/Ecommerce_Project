@@ -87,7 +87,7 @@
                             </ul>
                             <div class="d-flex">
                                 <button type="submit" name="buyNow" formaction="productCart" class="btn btn-primary btn-sm">Mua ngay</button>
-                                <button type="submit" name="addToCart" formaction="productCart" class="btn btn-secondary btn-sm">Bỏ vào giỏ hàng</button>
+                                <button type="submit" name="addToCart" formaction="productCart" class="btn btn-secondary btn-sm">Thêm vào giỏ hàng</button>
                             </div>
                         </div>
                     </form>

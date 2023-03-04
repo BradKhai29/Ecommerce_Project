@@ -24,6 +24,10 @@ public class TemporaryCart {
         return user;
     }
 
+    public Map<Integer, Product> getProductCart() {
+        return productCart;
+    }
+
     public int getSize() {
         return productCart.size();
     }
