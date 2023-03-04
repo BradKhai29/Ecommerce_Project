@@ -4,10 +4,12 @@
  */
 package controller.user;
 
+import controller.SupportEnum;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,9 +24,8 @@ public class LogoutServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        session.invalidate();        
-        request.getSession(true);
+        invalidateSession(request);
+        removeRememberUserCookie(request, response);
         
         response.sendRedirect(webpage_tools.WebPageEnum.HOME.getURL());
     }
@@ -44,6 +45,26 @@ public class LogoutServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return getServletName();
+    }
+
+    private void invalidateSession(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.invalidate();
+        request.getSession(true);
+    }
+
+    private void removeRememberUserCookie(HttpServletRequest request, HttpServletResponse response) {
+        Cookie[] cookies = request.getCookies();
+
+        for (int i = 0; i < cookies.length; i++) {
+            Cookie existCookie = cookies[i];
+            
+            //If exist cookie with name = rememberUser, then Remove it
+            if (existCookie.getName().equals(SupportEnum.REMEMBER_USER_COOKIE.getName())) {
+                existCookie.setMaxAge(0);
+                response.addCookie(existCookie);
+            }
+        }
     }
 
 }

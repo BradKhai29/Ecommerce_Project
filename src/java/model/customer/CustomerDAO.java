@@ -123,6 +123,8 @@ public class CustomerDAO extends BaseDAO<Customer> {
     {
         //Declare userOptional as empty optional
         Optional<Customer> userOptional = Optional.empty();
+        if(inputUserName == null || inputPassword == null) return userOptional;
+        
         openQuery(SELECT_USER_WITH_USERNAME);
         
         try {
@@ -141,7 +143,7 @@ public class CustomerDAO extends BaseDAO<Customer> {
                 String email = resultSet.getString("email");
                 String phoneNumber = resultSet.getString("phoneNumber");
                 
-                customer = new Customer(userID, username, email, passwd, fullname, phoneNumber);
+                customer = new Customer(userID, username, email, passwd, fullname, phoneNumber, userAddress);
             }
             
             boolean isValid = customer.getPasswd().equals(inputPassword);

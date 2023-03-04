@@ -93,4 +93,9 @@ public class Customer {
     public void setUserAddress(String userAddress) {
         this.userAddress = userAddress;
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }

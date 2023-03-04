@@ -4,6 +4,9 @@
 <c:if test="${applicationScope.products == null}">
     <jsp:forward page="root"></jsp:forward>
 </c:if>
+<c:if test="${sessionScope.CookieLoginCheckPoint == null}">
+    <jsp:forward page="loginWithCookie"></jsp:forward>
+</c:if>
 <!DOCTYPE html>
 <html>
     <head>

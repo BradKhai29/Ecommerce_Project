@@ -35,7 +35,7 @@ public class ProductLoadServlet extends HttpServlet {
         Map<Integer, Product> products = new ProductDAO().getAll(true);        
         servletContext.setAttribute("products", products);
         
-        response.sendRedirect(webpage_tools.WebPageEnum.ROOT.getURL());
+        response.sendRedirect(webpage_tools.WebPageEnum.HOME.getURL());
     }
     
     @Override

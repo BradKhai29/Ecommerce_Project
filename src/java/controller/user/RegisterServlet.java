@@ -42,6 +42,7 @@ public class RegisterServlet extends HttpServlet {
         String email = request.getParameter("email");
         String phoneNumber = request.getParameter("phoneNumber");
 
+        //Testing some information before register user
         boolean testExistUsername = customerDAO.checkExistUsername(username);
         boolean testConfirmPassword = checkConfirmPassword(password, confirmPassword);
         boolean testPhoneNumber = webpage_tools.CheckInputPhoneNumber.check(phoneNumber);
