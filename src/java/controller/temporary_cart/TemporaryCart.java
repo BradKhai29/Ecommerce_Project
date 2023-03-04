@@ -31,7 +31,7 @@ public class TemporaryCart {
     public int getSize() {
         return productCart.size();
     }
-
+    
     public void add(Product product, int quantity)
     {
         int productID = product.getProductID();

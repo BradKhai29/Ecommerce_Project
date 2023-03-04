@@ -9,6 +9,11 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
             <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+            <style>
+                input[type="number"]::-webkit-inner-spin-button{
+                    display: none;
+                }
+            </style>
         </head>
 
         <body>
@@ -29,20 +34,21 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <c:forEach var="product" items="${temporaryCart.productCart}">
+                                        <c:forEach var="product" items="${sessionScope.temporaryCart.productCart}">
                                             <tr>
                                                 <form action="changeQuantity" method="post">
+                                                    <input type="hidden" name="productID" value="${product.key}">
                                                     <th scope="row">${product.key}</th>
                                                     <td><img class="img-fluid img-thumbnail w-25 h-25"
                                                             src="${root}/${product.value.imgURL}" alt="productImg"></td>
                                                     <td>${product.value.productName}</td>
                                                     <td>${product.value.price}</td>
                                                     <td>
-                                                        <button type="submit" name="plus" class="btn btn-primary btn-sm">
+                                                        <button type="submit" name="minus" class="btn btn-primary btn-sm">
                                                             <i class="fa-solid fa-circle-minus"></i>
                                                         </button>
-                                                        <input type="number" value="${product.value.paymentQuantity}">
-                                                        <button type="submit" name="minus" class="btn btn-primary btn-sm">
+                                                        <input type="number" inputmode="numeric" name="quantity" value="${product.value.paymentQuantity}">
+                                                        <button type="submit" name="plus" class="btn btn-primary btn-sm">
                                                             <i class="fa-solid fa-circle-plus"></i>
                                                         </button>
                                                     </td>
