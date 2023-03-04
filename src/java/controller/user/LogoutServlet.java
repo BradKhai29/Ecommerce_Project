@@ -61,6 +61,8 @@ public class LogoutServlet extends HttpServlet {
             
             //If exist cookie with name = rememberUser, then Remove it
             if (existCookie.getName().equals(SupportEnum.REMEMBER_USER_COOKIE.getName())) {
+                String outDatedHashCode = existCookie.getValue();
+                RememberUserManager.remove(outDatedHashCode);
                 existCookie.setMaxAge(0);
                 response.addCookie(existCookie);
             }

@@ -65,7 +65,8 @@ public class LoginWithCookieServlet extends HttpServlet {
         Optional<Customer> rememberUser = Optional.empty();
 
         Cookie cookies[] = request.getCookies();
-        for (int i = 0; i < cookies.length; i++) {
+        for (int i = 0; i < cookies.length; i++) 
+        {
             Cookie existCookie = cookies[i];
 
             //If exist rememberUserCookie, read its value to check

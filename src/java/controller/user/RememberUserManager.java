@@ -19,14 +19,21 @@ public final class RememberUserManager {
         
         Customer rememberUser = rememberCustomers.get(hashCode);
         //If remember User is not null, then assign it to optional
-        if(rememberUser != null) customerOptional = Optional.of(rememberUser);
+        if(rememberUser != null) {
+            System.out.println("GET HASHCODE : ["  + hashCode + "]");
+            customerOptional = Optional.of(rememberUser);
+        }
         
         return customerOptional;
     }
     
     public static void add(String hashCode, Customer rememberUser)
     {
-        if(!rememberCustomers.containsKey(hashCode)) rememberCustomers.put(hashCode, rememberUser);
+        if(!rememberCustomers.containsKey(hashCode)) 
+        {
+            System.out.println("ADDED HASHCODE : ["  + hashCode + "]");
+            rememberCustomers.put(hashCode, rememberUser);
+        }
     }
     
     public static boolean remove(String hashCode)
@@ -37,6 +44,7 @@ public final class RememberUserManager {
         {
             rememberCustomers.remove(hashCode);
             removeSuccess = true;
+            System.out.println("REMOVED HASHCODE : ["  + hashCode + "]");
         }
         
         return removeSuccess;
