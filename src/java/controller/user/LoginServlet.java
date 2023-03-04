@@ -8,7 +8,6 @@ import controller.SupportEnum;
 import controller.TimeEnum;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +18,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.customer.Customer;
 import model.customer.CustomerDAO;
-import webpage_tools.WebPageEnum;
 
 /**
  *
@@ -29,11 +27,10 @@ import webpage_tools.WebPageEnum;
 public class LoginServlet extends HttpServlet {
 
     private static final CustomerDAO customerDAO;
-    private static final Map<String, Customer> rememberUsers;
 
     static {
         customerDAO = new CustomerDAO();
-        rememberUsers = new HashMap<>();
+        new HashMap<>();
     }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -55,8 +52,10 @@ public class LoginServlet extends HttpServlet {
             {
                 createRememberUserCookie(response, customer.get());
             }
+            
             session.setAttribute(SupportEnum.CUSTOMER.getName(), customer.get());
-            response.sendRedirect(WebPageEnum.HOME.getURL());
+            
+            response.sendRedirect(webpage_tools.ControllerEnum.TEMP_CART_SAVE.getURL());
         } 
         else 
         {
@@ -64,21 +63,6 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect(webpage_tools.WebPageEnum.LOGIN_PAGE.getURL());
         }
 
-    }
-
-    private void createRememberUserCookie(HttpServletResponse response, Customer customer) 
-    {
-        String userHashCode = Integer.toString(customer.hashCode());
-        Cookie rememberUserCookie = new Cookie(SupportEnum.REMEMBER_USER_COOKIE.getName(), userHashCode);
-
-        //Add this cookie to response for later retrieve
-        rememberUserCookie.setMaxAge(TimeEnum.REMEMBER_USER_COOKIE_TIME.getValue());
-        response.addCookie(rememberUserCookie);
-
-        //Add this user to rememeber maps for later auto-login function with rememberUserCookie
-        if (RememberUserManager.get(userHashCode).isEmpty()) {
-            RememberUserManager.add(userHashCode, customer);
-        }
     }
 
     @Override
@@ -98,4 +82,18 @@ public class LoginServlet extends HttpServlet {
         return getServletName();
     }
 
+    private void createRememberUserCookie(HttpServletResponse response, Customer customer) 
+    {
+        String userHashCode = Integer.toString(customer.hashCode());
+        Cookie rememberUserCookie = new Cookie(SupportEnum.REMEMBER_USER_COOKIE.getName(), userHashCode);
+
+        //Add this cookie to response for later retrieve
+        rememberUserCookie.setMaxAge(TimeEnum.REMEMBER_USER_COOKIE_TIME.getValue());
+        response.addCookie(rememberUserCookie);
+
+        //Add this user to rememeber maps for later auto-login function with rememberUserCookie
+        if (RememberUserManager.get(userHashCode).isEmpty()) {
+            RememberUserManager.add(userHashCode, customer);
+        }
+    }
 }

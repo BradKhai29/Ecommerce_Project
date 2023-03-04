@@ -13,11 +13,16 @@ public final class TemporaryCartManager {
     
     public static void add(String key, TemporaryCart temporaryCart)
     {
-        if(!temporaryCarts.containsKey(key)) temporaryCarts.put(key, temporaryCart);
+        if(!temporaryCarts.containsKey(key)) 
+        {
+            System.out.println("Add tempcart with key [" + key + "]");
+            temporaryCarts.put(key, temporaryCart);
+        }
     }
     
     public static void remove(String key)
     {
+        System.out.println("Remove tempcart with key [" + key + "]");
         temporaryCarts.remove(key);
     }
     
@@ -28,7 +33,10 @@ public final class TemporaryCartManager {
         
         //Get the tempCart and check if it is existed or not
         TemporaryCart tempCart = temporaryCarts.get(key);
-        if(tempCart != null) temporaryCart = Optional.of(tempCart);
+        if(tempCart != null) {
+            System.out.println("Get tempcart with key [" + key + "]");
+            temporaryCart = Optional.of(tempCart);
+        }
         
         return temporaryCart;
     }

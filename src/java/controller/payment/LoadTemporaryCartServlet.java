@@ -79,7 +79,7 @@ public class LoadTemporaryCartServlet extends HttpServlet {
         
         if (temporaryCart.isPresent()) 
         {
-            System.out.println("Exist temporary Cart");
+            System.out.println("Exist temporary Cart with key [" + username + "]");
             session.setAttribute(SupportEnum.TEMPORARY_CART.getName(), temporaryCart.get());
         }
     }
