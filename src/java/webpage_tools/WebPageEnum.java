@@ -10,7 +10,7 @@ package webpage_tools;
  */
 public enum WebPageEnum {
     ROOT(""),
-    HOME("home.jsp"),
+    HOME(""),
     ERROR_404("error404.jsp"),
     PRODUCT_DETAIL("product_detail_page"),
     LOGIN_PAGE("loginPage"),

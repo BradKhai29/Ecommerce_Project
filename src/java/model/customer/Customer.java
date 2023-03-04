@@ -11,7 +11,11 @@ public class Customer {
     String userAddress = "";
     
     //bỏ thêm thằng transaction map ở đây để hỗ trợ tính năng in lịch sử
-
+    public static Customer empty()
+    {
+        return new Customer(0, "", "", "", "", "");
+    }
+    
     public Customer() {
     }
 
@@ -22,6 +26,16 @@ public class Customer {
         this.passwd = passwd;
         this.fullname = fullname;
         this.phoneNumber = phoneNumber;
+    }
+    
+    public Customer(int userID, String username, String email, String passwd, String fullname, String phoneNumber, String userAddress) {
+        this.userID = userID;
+        this.username = username;
+        this.email = email;
+        this.passwd = passwd;
+        this.fullname = fullname;
+        this.phoneNumber = phoneNumber;
+        if(userAddress != null) this.userAddress = userAddress;
     }
 
     public int getUserID() {
@@ -79,6 +93,4 @@ public class Customer {
     public void setUserAddress(String userAddress) {
         this.userAddress = userAddress;
     }
-    
-    
 }

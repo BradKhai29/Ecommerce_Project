@@ -11,6 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.customer.Customer;
+import model.customer.CustomerDAO;
 
 /**
  *
@@ -18,59 +21,114 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "RegisterServlet", urlPatterns = {"/RegisterServlet", "/register"})
 public class RegisterServlet extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        
+    private static final CustomerDAO customerDAO;
+    
+    static {
+        customerDAO = new CustomerDAO();
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {      
+        System.out.println("Served at [" + getServletInfo() + "]");
+        HttpSession session = request.getSession(true);        
+        
+        String charEncoding = "UTF-8";
+        request.setCharacterEncoding(charEncoding);
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String confirmPassword = request.getParameter("confirmPassword");
+        String fullname = request.getParameter("fullname");
+        String userAddress = request.getParameter("userAddress");
+        String email = request.getParameter("email");
+        String phoneNumber = request.getParameter("phoneNumber");
+
+        boolean testExistUsername = customerDAO.checkExistUsername(username);
+        boolean testConfirmPassword = checkConfirmPassword(password, confirmPassword);
+        boolean testPhoneNumber = webpage_tools.CheckInputPhoneNumber.check(phoneNumber);
+        
+        if(!testExistUsername && testConfirmPassword && testPhoneNumber)
+        {
+            Customer customer = new Customer(0, username, email, password, fullname, phoneNumber, userAddress);
+            customerDAO.insert(customer);
+            
+            //Set customer to Session for other webapp functions
+            session.setAttribute("customer", customer);
+            session.setAttribute("registerMessage", "ĐĂNG KÝ TÀI KHOẢN THÀNH CÔNG");
+            
+            response.sendRedirect(webpage_tools.WebPageEnum.ROOT.getURL());
+        }
+        else {
+            setFormAttributesWithouRetype(session, username, fullname, userAddress, email, phoneNumber);
+            if(testExistUsername)
+            {
+                explicitSetFormAttributesWithouRetype(session, "username", "");
+                session.setAttribute("errorUsername", "TÊN ĐĂNG NHẬP ĐÃ TỒN TẠI VUI LÒNG CHỌN TÊN KHÁC");
+            }
+            
+            if(testConfirmPassword == false) {
+                session.setAttribute("errorPassword", "MẬT KHẨU NHẬP LẠI KHÔNG TRÙNG KHỚP, VUI LÒNG NHẬP LẠI");
+            }
+            
+            if(testPhoneNumber == false)
+            {
+                explicitSetFormAttributesWithouRetype(session, "phoneNumber", "");
+                session.setAttribute("errorPhone", "SỐ ĐIỆN THOẠI KHÔNG HỢP LỆ, VUI LÒNG NHẬP LẠI");
+            }
+            
+            response.sendRedirect(webpage_tools.WebPageEnum.REGISTER_PAGE.getURL());
+        }
+    }
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
+        return getServletName();
+    }
 
+    public boolean checkConfirmPassword(String password, String confirmPassword) {
+        return password.equals(confirmPassword);
+    }
+    
+    /**
+     * This method help user not to retype again their information if some thing error happened
+     * @param session 
+     */
+    public void setFormAttributesWithouRetype(HttpSession session,
+            String username,
+            String fullname,
+            String userAddress,
+            String email,
+            String phoneNumber)
+    {
+        session.removeAttribute("errorUsername");
+        session.removeAttribute("errorPassword");
+        session.setAttribute("username", username);
+        session.setAttribute("fullname", fullname);
+        session.setAttribute("userAddress", userAddress);
+        session.setAttribute("email", email);
+        session.setAttribute("phoneNumber", phoneNumber);
+    }
+    
+    /**
+     * This method help user not to retype again their information if some thing error happened
+     * <br> explicitly set the value
+     * @param session
+     * @param setName
+     * @param setValue 
+     */
+    public void explicitSetFormAttributesWithouRetype(HttpSession session, String setName, String setValue)
+    {
+        session.setAttribute(setName, setValue);
+    }
 }

@@ -16,32 +16,34 @@
     <body>
         <div class="container">
             <div class="div-register">
-                <form action="${root}/register" method="post"
+                <form action="register" method="post"
                       onsubmit="return validateRegister()" name="frm-register">
 
                     <table id="tbl-register">
                         <tr>
                             <td>Full Name <span>*</span></td>
-                            <td><input type="text" name="fullname" id="fullname"
-                                       placeholder="Họ và tên quý khách" required/></td>
+                            <td><input type="text" name="fullname" id="fullname" 
+                                       placeholder="Họ và tên quý khách" value="${fullname == null ? "" : fullname}" required/></td>
                         </tr>
                         <tr>
                             <td>Phone number<span>*</span></td>
-                            <td><input type="text" name="phoneNumber" placeholder="Số điện thoại" required/></td>
+                            <td><input type="text" name="phoneNumber" 
+                                       placeholder="Số điện thoại" value="${phoneNumber == null ? "" : phoneNumber}" required/></td>
                         </tr>
                         <tr>
-                            <td>Phone number<span>*</span></td>
-                            <td><input type="text" name="userAddress" placeholder="Địa chỉ (nếu có)"/></td>
+                            <td>Địa chỉ<span>*</span></td>
+                            <td><input type="text" name="userAddress" 
+                                       placeholder="Địa chỉ (nếu có)" value="${userAddress == null ? "" : userAddress}"/></td>
                         </tr>
                         <tr>
                             <td>Email <span>*</span></td>
-                            <td><input type="email" name="email" id="email"
-                                       placeholder="Email" required/></td>
+                            <td><input type="email" name="email" id="email" 
+                                       placeholder="Email" value="${email == null ? "" : email}" required/></td>
                         </tr>
                         <tr>
                             <td>User Name <span>*</span></td>
-                            <td><input type="text" name="userName" id="userName"
-                                       placeholder="Tên đăng nhập (Username)" required/></td>
+                            <td><input type="text" name="username" id="username"
+                                       placeholder="Tên đăng nhập (Username)" value="${username == null ? "" : username}" required/></td>
                         </tr>
                         <tr>
                             <td>Password <span>*</span></td>
@@ -65,6 +67,9 @@
                                 </a>
                             </td>
                         </tr>
+                        ${errorUsername}<br>
+                        ${errorPassword}<br>
+                        ${errorPhone}<br>
                     </table>
                 </form>
             </div>

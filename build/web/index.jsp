@@ -1,6 +1,6 @@
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <c:if test="${applicationScope.products == null}">
     <jsp:forward page="root"></jsp:forward>
 </c:if>
@@ -31,15 +31,31 @@
                                     <a class="nav-link active" aria-current="page" href="#">About Us</a>
                                 </li>
                             </ul>
-                            <div class="d-flex">
+                            <div class="d-flex flex-row">
                                 <h2>
-                                    <a href="${root}/loginPage" class="btn">
-                                        <h4>Login
-                                            <span class="badge bg-light text-dark">
-                                                <i class="fa-solid fa-circle-user"></i>
-                                            </span>
-                                        </h4>
-                                    </a>
+                                    <c:if var="test" test="${customer == null}">
+                                        <a href="${root}/loginPage" class="btn">
+                                            <h4>Login
+                                                <span class="badge bg-light text-dark">
+                                                    <i class="fa-solid fa-circle-user"></i>
+                                                </span>
+                                            </h4>
+                                        </a>
+                                    </c:if>
+                                    <c:if var="test2" test="${customer != null}">
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                ${customer.username} <i class="fa-solid fa-circle-user"></i>
+                                            </button>
+                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                                <li><a class="dropdown-item" href="#">Cài đặt tài khoản</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item" href="#">Xem danh sách hóa đơn</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
+                                            </ul>
+                                        </div>
+                                    </c:if>
                                     <a href="#">
                                         <span class="badge bg-secondary">Cart
                                             <i class="fa-solid fa-cart-shopping"></i>

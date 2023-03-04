@@ -1,10 +1,11 @@
-<%-- 
-    Document   : template
-    Created on : Jan 31, 2023, 2:35:36 PM
-    Author     : This PC
---%>
-
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+
+<c:if var="test" test="${sessionScope.customer != null}">
+    <c:redirect context="${root}" url="/"></c:redirect>
+</c:if>
 <!DOCTYPE html>
 <html>
     <head>
@@ -17,11 +18,11 @@
         <h1>LOGIN PAGE</h1>
         <div class="wrapper">
             <div class="div-login">
-                <form>
+                <form action="login" accept-charset="UTF-8" method="post">
                     <table id="tbl-login">
                         <tr>
                             <td>User Name <span>*</span></td>
-                            <td><input type="text" name="userName" id="userName"
+                            <td><input type="text" name="username" id="userName"
                                        placeholder="Tên đăng nhập" required ></td>
                         </tr>
                         <tr>
@@ -42,6 +43,7 @@
                                 <a href = "${root}/registerPage" id = "link-register">Đăng kí tài khoản</a>
                             </td>
                         </tr>
+                        ${error}
                     </table>
                 </form>
             </div>
