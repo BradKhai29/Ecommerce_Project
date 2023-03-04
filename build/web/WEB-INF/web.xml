@@ -12,6 +12,10 @@
         <servlet-name>productDetailPage</servlet-name>
         <jsp-file>/view/main/product_detail.jsp</jsp-file>
     </servlet>
+    <servlet>
+        <servlet-name>productCartPage</servlet-name>
+        <jsp-file>/view/main/productCart.jsp</jsp-file>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginPage</servlet-name>
         <url-pattern>/loginPage</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>productDetailPage</servlet-name>
         <url-pattern>/product_detail_page</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>productCartPage</servlet-name>
+        <url-pattern>/product_cart_page</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

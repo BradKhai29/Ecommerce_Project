@@ -29,7 +29,7 @@ public class LoginWithCookieServlet extends HttpServlet {
             throws ServletException, IOException {
         System.out.println("Served at [" + getServletInfo() + "]");
         HttpSession session = request.getSession(true);
-        session.setAttribute(SupportEnum.COOKIE_LOGIN_CHECKPOINT.getName(), "checkpoint");
+        session.setAttribute(SupportEnum.LOGIN_CHECKPOINT_COOKIE.getName(), "checkpoint");
         
         //Get the Cookie
         Optional<Customer> rememeberUser = processRemberUserCookie(request, response);

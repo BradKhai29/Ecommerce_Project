@@ -23,6 +23,8 @@ public class Product {
     int typeID;
     String typeName = "";
     
+    int paymentQuantity;
+    
     static {
        productTypeDAO = new ProductTypeDAO();
     }
@@ -115,5 +117,13 @@ public class Product {
     @Override
     public String toString() {
         return ("product" + productName + ":" + productID + ":" + price + ":" + priceCode + ":" + details);
+    }
+
+    public int getPaymentQuantity() {
+        return paymentQuantity;
+    }
+
+    public void setPaymentQuantity(int paymentQuantity) {
+        this.paymentQuantity = paymentQuantity;
     }
 }

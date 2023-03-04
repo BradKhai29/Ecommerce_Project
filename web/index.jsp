@@ -59,10 +59,10 @@
                                             </ul>
                                         </div>
                                     </c:if>
-                                    <a href="#">
+                                    <a href="product_cart_page">
                                         <span class="badge bg-secondary">Cart
                                             <i class="fa-solid fa-cart-shopping"></i>
-                                            <span class="badge bg-success">${temporaryCart == null ? "0" : temporaryCart}</span>
+                                            <span class="badge bg-success">${temporaryCart == null ? "0" : temporaryCart.size}</span>
                                         </span>
                                     </a>
                                 </h2>
@@ -85,10 +85,9 @@
                                 <li class="list-group-item">${product.value.price}</li>
                                 <li class="list-group-item">Loại sản phẩm: ${product.value.typeName}</li>
                             </ul>
-
                             <div class="d-flex">
-                                <button type="button" class="btn btn-primary btn-sm">Buy now</button>
-                                <button type="button" class="btn btn-secondary btn-sm">Add To Cart</button>
+                                <button type="submit" name="buyNow" formaction="productCart" class="btn btn-primary btn-sm">Mua ngay</button>
+                                <button type="submit" name="addToCart" formaction="productCart" class="btn btn-secondary btn-sm">Bỏ vào giỏ hàng</button>
                             </div>
                         </div>
                     </form>

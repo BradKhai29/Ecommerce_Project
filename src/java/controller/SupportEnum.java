@@ -11,8 +11,10 @@ package controller;
 public enum SupportEnum {
     CUSTOMER("customer"),
     REMEMBER_USER_COOKIE("rememberUser"),
-    COOKIE_LOGIN_CHECKPOINT("CookieLoginCheckPoint"),
-    TEMPORARY_CART("temporaryCart");
+    LOGIN_CHECKPOINT_COOKIE("CookieLoginCheckPoint"),
+    TEMPORARY_CART_COOKIE("temporaryCart"),
+    TEMPORARY_CART("temporaryCart"),
+    ADD_TEMP_CART_COOKIE_CHECKPOINT("addCartCookieCheckPoint");
     
     private String name;
 
