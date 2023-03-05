@@ -1,0 +1,50 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
+package controller.invoice;
+
+import controller.SupportEnum;
+import java.io.IOException;
+import java.util.Map;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.customer.Customer;
+import model.invoice.Invoice;
+
+@WebServlet(name = "InvoiceHistorySevlet", urlPatterns = {"/InvoiceHistorySevlet", "/invoiceHistory"})
+public class InvoiceHistorySevlet extends HttpServlet {
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        System.out.println("Served at [" + getServletName() + "]");
+        HttpSession session = request.getSession();
+        Customer user = (Customer)session.getAttribute(SupportEnum.CUSTOMER.getName());
+        
+        boolean isLogin = user != null;
+        
+        if (isLogin) {
+            Map<Integer, Invoice> invoices = user.getInvoices();
+            session.setAttribute(SupportEnum.INVOICE_HISTORY.getName(), invoices);
+            
+            response.sendRedirect(webpage_tools.WebPageEnum.INVOICE_HISTORY.getURL());
+        }
+        else response.sendRedirect(webpage_tools.WebPageEnum.HOME.getURL());
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+}

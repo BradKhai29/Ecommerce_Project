@@ -53,7 +53,7 @@
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                 <li><a class="dropdown-item" href="#">Cài đặt tài khoản</a></li>
                                                 <li><hr class="dropdown-divider"></li>
-                                                <li><a class="dropdown-item" href="#">Xem danh sách hóa đơn</a></li>
+                                                <li><a class="dropdown-item" href="invoiceHistory">Xem danh sách hóa đơn</a></li>
                                                 <li><hr class="dropdown-divider"></li>
                                                 <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
                                             </ul>

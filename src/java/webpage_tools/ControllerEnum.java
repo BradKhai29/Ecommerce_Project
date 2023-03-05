@@ -14,7 +14,8 @@ public enum ControllerEnum {
     TEMP_CART_LOAD("loadTempCart"),
     TEMP_CART_SAVE("saveTempCart"),
     PAYMENT("payment"),
-    LOGIN("login");
+    LOGIN("login"),
+    INVOICE_HISTORY("invoiceHistory");
     
     private static String contextPath = "/A_Ecommerce_Project/";
     private String URL;

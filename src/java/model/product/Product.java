@@ -34,6 +34,11 @@ public class Product {
 
     public Product() {
     }
+    
+    public static Product createNew()
+    {
+        return new Product();
+    }
 
     public Product(int productID, String productName, String imgURL, int price, int priceCode, String details, int productStatus, int typeID) {
         StringBuffer contextPath = new StringBuffer("product/");  

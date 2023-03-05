@@ -14,11 +14,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.customer.Customer;
 import model.invoice.Invoice;
+import model.invoice.InvoiceDAO;
 import model.temporary_cart.TemporaryCart;
 import webpage_tools.*;
 
 @WebServlet(name = "PaymentServlet", urlPatterns = {"/PaymentServlet", "/payment"})
 public class PaymentServlet extends HttpServlet {
+    private static InvoiceDAO invoiceDAO;
+    
+    static {
+        invoiceDAO = new InvoiceDAO();
+    }
+    
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -67,6 +74,7 @@ public class PaymentServlet extends HttpServlet {
     private void processPayment(TemporaryCart temporaryCart)
     {
         Invoice invoice = new Invoice(temporaryCart);
+        invoiceDAO.insert(invoice);
     }
 
 }

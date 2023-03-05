@@ -1,5 +1,9 @@
 package model.customer;
 
+import java.util.Map;
+import model.invoice.Invoice;
+import model.invoice.InvoiceDAO;
+
 public class Customer {
     int userID;
     String username;
@@ -11,6 +15,13 @@ public class Customer {
     String userAddress = "";
     
     //bỏ thêm thằng transaction map ở đây để hỗ trợ tính năng in lịch sử
+    private static InvoiceDAO invoiceDAO;
+    private Map<Integer, Invoice> invoices;
+    
+    static {
+        invoiceDAO = new InvoiceDAO();
+    }
+    
     public static Customer empty()
     {
         return new Customer(0, "", "", "", "", "");
@@ -97,5 +108,14 @@ public class Customer {
     @Override
     public int hashCode() {
         return super.hashCode();
+    }
+
+    public Map<Integer, Invoice> getInvoices() {
+        if(invoices == null) setInvoices(invoiceDAO.getAll(userID));
+        return invoices;
+    }
+
+    public void setInvoices(Map<Integer, Invoice> invoices) {
+        this.invoices = invoices;
     }
 }

@@ -22,11 +22,11 @@ public class ProductDAO extends model.DAO.BaseDAO<Product> {
     }
 
     private static String SELECT_ALL = "SELECT p.productID, productName, price, p.priceCode, imgURL, details, productStatus, typeID "
-            + "FROM Product p INNER JOIN ProductPrice pp ON p.priceCode = pp.priceCode";
+                                     + "FROM Product p INNER JOIN ProductPrice pp ON p.priceCode = pp.priceCode";
 
-    private static String SELECT = "SELECT productName, price, p.priceCode, imgURL, details, available \n"
-            + "FROM Product p INNER JOIN ProductPrice pp ON p.priceCode = pp.priceCode\n"
-            + "WHERE productID = ?";
+    private static String SELECT_WITH_PRODUCTID_AND_PRICECODE = "SELECT productName, price, imgURL, typeID, productStatus \n"
+                                                              + "FROM Product p INNER JOIN ProductPrice pp ON p.priceCode = pp.priceCode\n"
+                                                              + "WHERE p.productID = ? AND p.priceCode = ?";
 
     @Override
     protected void openQuery(String SQLQuery) {
@@ -52,6 +52,41 @@ public class ProductDAO extends model.DAO.BaseDAO<Product> {
     @Override
     public Optional<Product> get(int id) {
         Optional<Product> product = Optional.of(products.get(id));
+        return product;
+    }
+    
+    /**
+     * Get product with given productID and priceCode
+     * @param productID
+     * @param priceCode
+     * @return 
+     */
+    public Product get(int productID, int priceCode) {
+        Product product = Product.createNew();
+        product.setProductID(productID);
+        openQuery(SELECT_WITH_PRODUCTID_AND_PRICECODE);
+        
+        try {
+            query.setInt(1, productID);
+            query.setInt(2, priceCode);
+            
+            ResultSet resultSet = query.executeQuery();
+            String productName = resultSet.getString("productName");
+            int price = resultSet.getInt("price");
+            String imgURL = resultSet.getString("imgURL");
+            int typeID = resultSet.getInt("typeID");
+            int productStatus = resultSet.getInt("productStatus");
+            
+            product.setProductName(productName);
+            product.setPrice(price);
+            product.setImgURL(imgURL);
+            product.setTypeID(typeID);
+            product.setProductStatus(productStatus);            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        closeQuery();
         return product;
     }
 

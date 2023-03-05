@@ -11,17 +11,22 @@ public class TemporaryCart {
     private int totalPrice = 0;
     private boolean doUpdate = false;
     
-    
     private Optional<Customer> user;
-    private Map<Integer, Product> productCart = productCart = new HashMap<>();
+    private Map<Integer, Product> productCart = new HashMap<>();
 
     public TemporaryCart() {
         user = Optional.empty();
     }
 
-    public TemporaryCart(Customer user) {
+    public TemporaryCart(Customer user) 
+    {
         if(user == null) this.user = Optional.empty();
         else this.user = Optional.of(user);
+    }
+    
+    public static TemporaryCart createNew()
+    {
+        return new TemporaryCart();
     }
 
     public Optional<Customer> getUser() {

@@ -14,7 +14,8 @@ public enum SupportEnum {
     TEMPORARY_CART_COOKIE("temporaryCart"),
     TEMPORARY_CART("temporaryCart"),
     COOKIE_LOGIN_CHECKPOINT("CookieLoginCheckPoint"),
-    ADD_TEMP_CART_COOKIE_CHECKPOINT("addCartCookieCheckPoint");
+    ADD_TEMP_CART_COOKIE_CHECKPOINT("addCartCookieCheckPoint"),
+    INVOICE_HISTORY("invoices"),;
     
     private String name;
 
