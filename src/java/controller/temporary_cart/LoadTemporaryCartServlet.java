@@ -4,6 +4,8 @@
  */
 package controller.temporary_cart;
 
+import model.temporary_cart.TemporaryCartManager;
+import model.temporary_cart.TemporaryCart;
 import controller.SupportEnum;
 import java.io.IOException;
 import java.util.Optional;

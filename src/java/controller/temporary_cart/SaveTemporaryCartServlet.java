@@ -4,9 +4,10 @@
  */
 package controller.temporary_cart;
 
+import model.temporary_cart.TemporaryCartManager;
+import model.temporary_cart.TemporaryCart;
 import controller.SupportEnum;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -18,7 +19,9 @@ import model.customer.Customer;
 
 /**
  *
- * @author This PC
+ * This servlet will save the temporary cart with key = username.
+ * <br>If user did add to cart without login, but then login to buy.
+ * <br>This servlet will save that cart to cart manager with key = username
  */
 @WebServlet(name = "SaveTemporaryCartServlet", urlPatterns = {"/SaveTemporaryCartServlet", "/saveTempCart"})
 public class SaveTemporaryCartServlet extends HttpServlet {

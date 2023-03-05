@@ -22,7 +22,7 @@
                     <div class="container">
                         <div class="row">
                             <h1>PRODUCT CART PAGE</h1>
-                            <c:if var="test" test="${sessionScope.temporaryCart != null}">
+                            <c:if var="test" test="${sessionScope.temporaryCart != null && sessionScope.temporaryCart.size > 0}">
                                 <table class="table table-success">
                                     <thead>
                                         <tr>
@@ -31,6 +31,8 @@
                                             <th scope="col">Tên sản phẩm</th>
                                             <th scope="col">Đơn giá</th>
                                             <th scope="col">Số lượng</th>
+                                            <th scope="col">Tổng tiền</th>
+                                            <th scope="col">...</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -52,9 +54,19 @@
                                                             <i class="fa-solid fa-circle-plus"></i>
                                                         </button>
                                                     </td>
+                                                    <td>${product.value.totalPrice}.000</td>
+                                                    <td>
+                                                        <button type="submit" name="delete" class="btn btn-danger btn-sm">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </button>
+                                                    </td>
                                                 </form>
                                             </tr>
                                         </c:forEach>
+                                        <tr>
+                                            <th scope="row" colspan="5">Tổng tiền hóa đơn</th>
+                                            <td colspan="2">${sessionScope.temporaryCart.totalPrice}.000</td>
+                                          </tr>
                                     </tbody>
                                 </table>
                                 <a href="${root}" class="btn btn-primary">Trang Chủ</a>
@@ -62,7 +74,7 @@
                         </div>
                     </div>
                     <div class="container">
-                        <c:if var="test2" test="${sessionScope.temporaryCart == null}">
+                        <c:if var="test2" test="${sessionScope.temporaryCart == null || sessionScope.temporaryCart.size == 0}">
                             <div class="card">
                                 <div class="card-header">
                                     GIỎ HÀNG ĐANG TRỐNG

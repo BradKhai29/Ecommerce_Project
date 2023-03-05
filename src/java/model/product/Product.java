@@ -13,17 +13,20 @@ import java.util.Objects;
 public class Product {    
     private static ProductTypeDAO productTypeDAO;
     
-    int productID;
-    String productName;
-    String imgURL;
-    int price;
-    int priceCode;
-    String details;
-    int productStatus;
-    int typeID;
-    String typeName = "";
+    //Database attributes section
+    private int productID;
+    private String productName;
+    private String imgURL;
+    private int price;
+    private int priceCode;
+    private String details;
+    private int productStatus;
+    private int typeID;
+    private String typeName = "";
     
+    //In app attribute section
     int paymentQuantity;
+    int totalPrice;
     
     static {
        productTypeDAO = new ProductTypeDAO();
@@ -114,16 +117,21 @@ public class Product {
         return typeName;
     }
 
-    @Override
-    public String toString() {
-        return ("product" + productName + ":" + productID + ":" + price + ":" + priceCode + ":" + details);
-    }
-
     public int getPaymentQuantity() {
         return paymentQuantity;
     }
 
     public void setPaymentQuantity(int paymentQuantity) {
         this.paymentQuantity = paymentQuantity;
+    }
+
+    public int getTotalPrice() {
+        totalPrice = paymentQuantity * price;
+        return totalPrice;
+    }
+    
+    @Override
+    public String toString() {
+        return ("product" + productName + ":" + productID + ":" + price + ":" + priceCode + ":" + details);
     }
 }

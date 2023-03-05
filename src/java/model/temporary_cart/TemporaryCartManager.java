@@ -1,4 +1,4 @@
-package controller.temporary_cart;
+package model.temporary_cart;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -3,14 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/controller/payment/TemporaryCart.java</file>
-            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/controller/SupportEnum.java</file>
-            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/controller/payment/TemporaryCartManager.java</file>
-            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/controller/user/LogoutServlet.java</file>
-            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/controller/payment/ProductCartServlet.java</file>
+            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/controller/temporary_cart/SaveTemporaryCartServlet.java</file>
+            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/webpage_tools/ControllerEnum.java</file>
+            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/controller/temporary_cart/LoadTemporaryCartServlet.java</file>
+            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/controller/temporary_cart/ChangeQuantityServlet.java</file>
             <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/web/view/main/productCart.jsp</file>
-            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/web/index.jsp</file>
-            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/controller/user/LoginWithCookieServlet.java</file>
+            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/controller/temporary_cart/TemporaryCart.java</file>
         </group>
     </open-files>
 </project-private>
