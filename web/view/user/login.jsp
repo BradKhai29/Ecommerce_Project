@@ -43,7 +43,8 @@
                                 <a href = "${root}/registerPage" id = "link-register">Đăng kí tài khoản</a>
                             </td>
                         </tr>
-                        ${error}
+                        ${requiredLogin}
+                        ${loginError}
                     </table>
                 </form>
             </div>

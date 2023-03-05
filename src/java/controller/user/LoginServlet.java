@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller.user;
 
 import controller.SupportEnum;
@@ -18,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.customer.Customer;
 import model.customer.CustomerDAO;
+import webpage_tools.MessageEnum;
 
 /**
  *
@@ -54,12 +51,12 @@ public class LoginServlet extends HttpServlet {
             }
             
             session.setAttribute(SupportEnum.CUSTOMER.getName(), customer.get());
-            
             response.sendRedirect(webpage_tools.ControllerEnum.TEMP_CART_SAVE.getURL());
         } 
         else 
         {
-            session.setAttribute("error", "TÊN ĐĂNG NHẬP HOẶC MẬT KHẨU KHÔNG ĐÚNG");
+            MessageEnum message = MessageEnum.LOGIN_ERROR;
+            session.setAttribute(message.getName(), message.getMessage());
             response.sendRedirect(webpage_tools.WebPageEnum.LOGIN_PAGE.getURL());
         }
 

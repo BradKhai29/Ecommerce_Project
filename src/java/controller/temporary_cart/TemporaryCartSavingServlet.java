@@ -8,6 +8,7 @@ import model.temporary_cart.TemporaryCartManager;
 import model.temporary_cart.TemporaryCart;
 import controller.SupportEnum;
 import java.io.IOException;
+import java.util.Optional;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -24,7 +25,7 @@ import model.customer.Customer;
  * <br>This servlet will save that cart to cart manager with key = username
  */
 @WebServlet(name = "SaveTemporaryCartServlet", urlPatterns = {"/SaveTemporaryCartServlet", "/saveTempCart"})
-public class SaveTemporaryCartServlet extends HttpServlet {
+public class TemporaryCartSavingServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -83,6 +84,8 @@ public class SaveTemporaryCartServlet extends HttpServlet {
             }
         }
         
+        //Save user obj to this TemporaryCart
+        temporaryCart.setUser(Optional.of(user));
         //Map the current temporary cart with new key = username
         TemporaryCartManager.add(user.getUsername(), temporaryCart);
     }

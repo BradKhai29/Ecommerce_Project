@@ -21,7 +21,7 @@ import webpage_tools.WebPageEnum;
  * @code This Servlet is used for create temporaryCart and send temporaryCart cookie
  */
 @WebServlet(name = "ProductCartServlet", urlPatterns = {"/ProductCartServlet", "/productCart"})
-public final class ProductCartServlet extends HttpServlet {
+public final class TemporaryCartServlet extends HttpServlet {
 
     private static final ProductDAO productDAO;
 
@@ -39,15 +39,15 @@ public final class ProductCartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("Served at [" + getServletInfo() + "]");
-        HttpSession session = request.getSession(true);
         
+        HttpSession session = request.getSession(true);
         String addToCart = request.getParameter("addToCart");
         
-        //get user
+        //get user stored in session
         Customer user = (Customer) session.getAttribute(SupportEnum.CUSTOMER.getName());
         boolean isLogin = user != null;
 
-        //get temp cart
+        //get temp cart 
         TemporaryCart temporaryCart = getTemporaryCart(session, user);
 
         int productID = Integer.parseInt(request.getParameter("productID"));
@@ -55,12 +55,14 @@ public final class ProductCartServlet extends HttpServlet {
         temporaryCart.add(product.get(), 1);
 
         if (isLogin) {
-            processWithLoginUser(session, response, temporaryCart, user);
+            processWithLoginUser(session, temporaryCart, user);
         } else {
             processWithoutLoginUser(session, response, temporaryCart);
         }
 
+        //Set temporary cart to Session
         session.setAttribute(SupportEnum.TEMPORARY_CART.getName(), temporaryCart);
+        
         if(addToCart != null) response.sendRedirect(WebPageEnum.HOME.getURL());
         else response.sendRedirect(WebPageEnum.TEMP_CART.getURL());
     }
@@ -71,9 +73,7 @@ public final class ProductCartServlet extends HttpServlet {
     }
 
     /**
-     * Return the current temporary cart in the session
-     * <br> if <code>null</code>, create one
-     *
+     * Return the current temporary cart in the session. If the TemporaryCart is <code>NULL</code>, create new one
      * @param session
      * @param user
      * @return
@@ -111,7 +111,7 @@ public final class ProductCartServlet extends HttpServlet {
         session.setAttribute(SupportEnum.ADD_TEMP_CART_COOKIE_CHECKPOINT.getName(), "check");
     }
 
-    private void processWithLoginUser(HttpSession session, HttpServletResponse response, TemporaryCart temporaryCart, Customer user) {
+    private void processWithLoginUser(HttpSession session, TemporaryCart temporaryCart, Customer user) {
         //Add to TemporaryCart manager
         TemporaryCartManager.add(user.getUsername(), temporaryCart);
     }

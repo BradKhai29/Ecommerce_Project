@@ -15,41 +15,10 @@ public class ChangeQuantityServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        
+        HttpSession session = request.getSession();        
         TemporaryCart temporaryCart = (TemporaryCart)session.getAttribute(SupportEnum.TEMPORARY_CART.getName());
-        String plus = request.getParameter("plus");
-        String minus = request.getParameter("minus");
-        String delete = request.getParameter("delete");
-        int productID = Integer.parseInt(request.getParameter("productID"));
-        int quantity = 1;
-        try {
-            quantity = Integer.parseInt(request.getParameter("quantity"));
-        } catch (Exception e) {
-        }
         
-        if(temporaryCart != null)
-        {
-            boolean isLargerThan1 = quantity > 1;
-            boolean isPlus = plus != null;
-            boolean isMinus = minus != null;
-            boolean isDelete = delete != null;
-            
-            if(isPlus) {
-                System.out.println("INCREASE_QUANTITY");
-                quantity++;
-                temporaryCart.updateQuantity(productID, quantity);
-            }
-            if(isMinus) {
-                System.out.println("DECREASE_QUANTITY");
-                if(isLargerThan1) quantity--;
-                temporaryCart.updateQuantity(productID, quantity);
-            }
-            
-            if(isDelete){
-                temporaryCart.remove(productID);
-            }
-        }
+        processCartAction(temporaryCart, request);
         
         response.sendRedirect(webpage_tools.WebPageEnum.TEMP_CART.getURL());
     }
@@ -65,5 +34,51 @@ public class ChangeQuantityServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+    }
+    
+    private void processCartAction(TemporaryCart temporaryCart, HttpServletRequest request)
+    {
+        //Get information section
+        String plus = request.getParameter("plus");
+        String minus = request.getParameter("minus");
+        String delete = request.getParameter("delete");
+        String clear = request.getParameter("clear");
+        int productID = 0;
+        int quantity = 1;
+        try {
+            productID = Integer.parseInt(request.getParameter("productID"));
+            quantity = Integer.parseInt(request.getParameter("quantity"));
+        } catch (Exception e) {
+        }
+        
+        //Process Action section
+        if(temporaryCart != null)
+        {
+            boolean isLargerThan1 = quantity > 1;
+            boolean isPlus = plus != null;
+            boolean isMinus = minus != null;
+            boolean isDelete = delete != null;
+            boolean isClear = clear != null;
+            
+            if(isPlus) {
+                System.out.println("INCREASE_QUANTITY");
+                quantity++;
+                temporaryCart.updateQuantity(productID, quantity);
+            }
+            
+            if(isMinus) {
+                System.out.println("DECREASE_QUANTITY");
+                if(isLargerThan1) quantity--;
+                temporaryCart.updateQuantity(productID, quantity);
+            }
+            
+            if(isDelete){
+                temporaryCart.remove(productID);
+            }
+            
+            if(isClear){
+                temporaryCart.clear();
+            }
+        }
     }
 }

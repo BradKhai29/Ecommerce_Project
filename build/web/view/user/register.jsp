@@ -67,9 +67,9 @@
                                 </a>
                             </td>
                         </tr>
-                        ${errorUsername}<br>
-                        ${errorPassword}<br>
-                        ${errorPhone}<br>
+                        ${existUsername}<br>
+                        ${confirmPasswordError}<br>
+                        ${phoneNumberError}<br>
                     </table>
                 </form>
             </div>

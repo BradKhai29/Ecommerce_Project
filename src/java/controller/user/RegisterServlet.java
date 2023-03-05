@@ -4,6 +4,7 @@
  */
 package controller.user;
 
+import controller.SupportEnum;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.customer.Customer;
 import model.customer.CustomerDAO;
+import webpage_tools.MessageEnum;
 
 /**
  *
@@ -30,10 +32,14 @@ public class RegisterServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {      
         System.out.println("Served at [" + getServletInfo() + "]");
-        HttpSession session = request.getSession(true);        
+        HttpSession session = request.getSession(true); 
+        MessageEnum message;
+        
+        Object requiredLoginMessage = session.getAttribute(MessageEnum.LOGIN_REQUIRED.getName());
         
         String charEncoding = "UTF-8";
         request.setCharacterEncoding(charEncoding);
+        
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
@@ -46,34 +52,44 @@ public class RegisterServlet extends HttpServlet {
         boolean testExistUsername = customerDAO.checkExistUsername(username);
         boolean testConfirmPassword = checkConfirmPassword(password, confirmPassword);
         boolean testPhoneNumber = webpage_tools.CheckInputPhoneNumber.check(phoneNumber);
+        boolean haveRequiredLoginMessage = requiredLoginMessage != null;
         
         if(!testExistUsername && testConfirmPassword && testPhoneNumber)
         {
             Customer customer = new Customer(0, username, email, password, fullname, phoneNumber, userAddress);
             customerDAO.insert(customer);
             
+            message = MessageEnum.REGISTER_SUCCESS;
             //Set customer to Session for other webapp functions
-            session.setAttribute("customer", customer);
-            session.setAttribute("registerMessage", "ĐĂNG KÝ TÀI KHOẢN THÀNH CÔNG");
+            session.setAttribute(SupportEnum.CUSTOMER.getName(), customer);
+            session.setAttribute(message.getName(), message.getMessage());
             
-            response.sendRedirect(webpage_tools.WebPageEnum.ROOT.getURL());
+            //If have required login message, send to save temporary cart servlet
+            if(haveRequiredLoginMessage) response.sendRedirect(webpage_tools.ControllerEnum.TEMP_CART_SAVE.getURL());
+            
+            //else, send user to homepage
+            else response.sendRedirect(webpage_tools.WebPageEnum.ROOT.getURL());
         }
         else {
             setFormAttributesWithouRetype(session, username, fullname, userAddress, email, phoneNumber);
+            
             if(testExistUsername)
             {
-                explicitSetFormAttributesWithouRetype(session, "username", "");
-                session.setAttribute("errorUsername", "TÊN ĐĂNG NHẬP ĐÃ TỒN TẠI VUI LÒNG CHỌN TÊN KHÁC");
+                message = MessageEnum.EXIST_USERNAME;
+                session.removeAttribute("username");
+                session.setAttribute(message.getName(), message.getMessage());
             }
             
             if(testConfirmPassword == false) {
-                session.setAttribute("errorPassword", "MẬT KHẨU NHẬP LẠI KHÔNG TRÙNG KHỚP, VUI LÒNG NHẬP LẠI");
+                message = MessageEnum.CONFIRM_PASSWORD_ERROR;
+                session.setAttribute(message.getName(), message.getMessage());
             }
             
             if(testPhoneNumber == false)
             {
-                explicitSetFormAttributesWithouRetype(session, "phoneNumber", "");
-                session.setAttribute("errorPhone", "SỐ ĐIỆN THOẠI KHÔNG HỢP LỆ, VUI LÒNG NHẬP LẠI");
+                message = MessageEnum.INVALID_PHONENUMBER;
+                session.removeAttribute("phoneNumber");
+                session.setAttribute(message.getName(), message.getMessage());
             }
             
             response.sendRedirect(webpage_tools.WebPageEnum.REGISTER_PAGE.getURL());
@@ -119,17 +135,5 @@ public class RegisterServlet extends HttpServlet {
         session.setAttribute("userAddress", userAddress);
         session.setAttribute("email", email);
         session.setAttribute("phoneNumber", phoneNumber);
-    }
-    
-    /**
-     * This method help user not to retype again their information if some thing error happened
-     * <br> explicitly set the value
-     * @param session
-     * @param setName
-     * @param setValue 
-     */
-    public void explicitSetFormAttributesWithouRetype(HttpSession session, String setName, String setValue)
-    {
-        session.setAttribute(setName, setValue);
     }
 }

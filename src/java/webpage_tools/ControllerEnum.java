@@ -13,6 +13,7 @@ public enum ControllerEnum {
     PRODUCT_LOAD("productLoad"),
     TEMP_CART_LOAD("loadTempCart"),
     TEMP_CART_SAVE("saveTempCart"),
+    PAYMENT("payment"),
     LOGIN("login");
     
     private static String contextPath = "/A_Ecommerce_Project/";
@@ -28,6 +29,11 @@ public enum ControllerEnum {
 
     public String getURL() {
         return contextPath.concat(URL);
+    }
+    
+    public String getRefURL()
+    {
+        return "/".concat(URL);
     }
     
     @Override

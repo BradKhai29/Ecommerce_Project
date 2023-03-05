@@ -17,19 +17,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.customer.Customer;
+import webpage_tools.MessageEnum;
 
 /**
- *
- * @author This PC
+ * Load the Temporary Cart corresponding to these situations:
+ * <br>> cookie value : if user not login
+ * <br>> username : if user login
  */
 @WebServlet(name = "LoadTemporaryCartServlet", urlPatterns = {"/LoadTemporaryCartServlet", "/loadTempCart"})
-public class LoadTemporaryCartServlet extends HttpServlet {
+public class TemporaryCartLoadServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         System.out.println("Served at [" + getServletInfo() + "]");
         HttpSession session = request.getSession(true);
-
+        Object requiredLoginMessage = session.getAttribute(MessageEnum.LOGIN_REQUIRED.getName());
+        
         Customer user = (Customer) session.getAttribute(SupportEnum.CUSTOMER.getName());
         if (user == null) 
         {
@@ -38,7 +41,13 @@ public class LoadTemporaryCartServlet extends HttpServlet {
             processUserTemporaryCart(session, user);
         }
 
-        response.sendRedirect(webpage_tools.WebPageEnum.HOME.getURL());
+        boolean haverequiredLoginMessage = requiredLoginMessage != null;
+        
+        if(haverequiredLoginMessage) {
+            session.removeAttribute(MessageEnum.LOGIN_REQUIRED.getName());
+            response.sendRedirect(webpage_tools.WebPageEnum.TEMP_CART.getURL());
+        }
+        else response.sendRedirect(webpage_tools.WebPageEnum.HOME.getURL());
     }
 
     @Override

@@ -28,6 +28,20 @@ public class TemporaryCart {
         return user;
     }
 
+    public void setUser(Optional<Customer> user) {
+        this.user = user;
+    }
+    
+    public int getUserID()
+    {
+        if(user == null) 
+        {
+            System.out.println("THIS TEMPORARY CART DID NOT SET THE USER");
+            return 0;
+        }
+        return user.get().getUserID();
+    }
+
     public Map<Integer, Product> getProductCart() {
         return productCart;
     }
