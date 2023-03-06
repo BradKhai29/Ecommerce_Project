@@ -3,16 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/controller/invoice/InvoiceHistorySevlet.java</file>
-            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/controller/SupportEnum.java</file>
+            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/model/product/Product.java</file>
             <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/model/invoice/InvoiceDAO.java</file>
-            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/model/invoice/Invoice.java</file>
-            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/model/customer/Customer.java</file>
+            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/model/product/ProductDAO.java</file>
+            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/model/temporary_cart/TemporaryCart.java</file>
             <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/controller/payment/PaymentServlet.java</file>
-            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/web/WEB-INF/web.xml</file>
+            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/webpage_tools/PrintTools.java</file>
             <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/web/index.jsp</file>
             <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/web/view/main/productCart.jsp</file>
-            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/web/view/user/invoice_history.jsp</file>
         </group>
     </open-files>
 </project-private>

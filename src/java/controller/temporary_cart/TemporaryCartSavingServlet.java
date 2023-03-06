@@ -4,6 +4,8 @@
  */
 package controller.temporary_cart;
 
+import controller.CookieEnum;
+import controller.CookieSupportServlet;
 import model.temporary_cart.TemporaryCartManager;
 import model.temporary_cart.TemporaryCart;
 import controller.SupportEnum;
@@ -70,19 +72,11 @@ public class TemporaryCartSavingServlet extends HttpServlet {
             , TemporaryCart temporaryCart)
     {
         //Remove the temporaryCart cookie
-        Cookie[] cookies = request.getCookies();
-        for(int i = 0; i < cookies.length; i++)
-        {
-            Cookie existCookie = cookies[i];
-            if(existCookie.getName().equals(SupportEnum.TEMPORARY_CART_COOKIE.getName()))
-            {
-                String cookieValue = existCookie.getValue();
-                TemporaryCartManager.remove(cookieValue);
-                
-                existCookie.setMaxAge(0);
-                response.addCookie(existCookie);
-            }
-        }
+        CookieEnum cookieEnum = CookieEnum.TEMPORARY_CART_COOKIE;
+        String cookieValue = CookieSupportServlet.removeCookie(request, response, cookieEnum);
+        
+        //remove mapping
+        TemporaryCartManager.remove(cookieValue);
         
         //Save user obj to this TemporaryCart
         temporaryCart.setUser(Optional.of(user));

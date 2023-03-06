@@ -4,6 +4,8 @@
  */
 package controller.user;
 
+import controller.CookieEnum;
+import controller.CookieSupportServlet;
 import controller.SupportEnum;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -54,19 +56,7 @@ public class LogoutServlet extends HttpServlet {
     }
 
     private void removeRememberUserCookie(HttpServletRequest request, HttpServletResponse response) {
-        Cookie[] cookies = request.getCookies();
-
-        for (int i = 0; i < cookies.length; i++) {
-            Cookie existCookie = cookies[i];
-            
-            //If exist cookie with name = rememberUser, then Remove it
-            if (existCookie.getName().equals(SupportEnum.REMEMBER_USER_COOKIE.getName())) {
-                String outDatedHashCode = existCookie.getValue();
-                RememberUserManager.remove(outDatedHashCode);
-                existCookie.setMaxAge(0);
-                response.addCookie(existCookie);
-            }
-        }
+        CookieSupportServlet.removeCookie(request, response, CookieEnum.REMEMBER_USER_COOKIE);
     }
 
 }

@@ -15,13 +15,9 @@ public class Customer {
     String userAddress = "";
     
     //bỏ thêm thằng transaction map ở đây để hỗ trợ tính năng in lịch sử
-    private static InvoiceDAO invoiceDAO;
+    private InvoiceDAO invoiceDAO = new InvoiceDAO();
     private Map<Integer, Invoice> invoices;
-    
-    static {
-        invoiceDAO = new InvoiceDAO();
-    }
-    
+
     public static Customer empty()
     {
         return new Customer(0, "", "", "", "", "");

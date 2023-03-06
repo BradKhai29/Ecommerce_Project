@@ -26,7 +26,7 @@ public class InvoiceDAO extends BaseDAO<Invoice> {
     private static String INSERT_INVOICE_DETAIL = "INSERT INTO InvoiceDetail (invoiceID, productID, priceCode, quantity) VALUES (?, ?, ?, ?);";
     
     private static String GET_INVOICE_WITH_USER_ID = "SELECT invoiceID, totalMoney, createdAt\n"
-                                                      + "FROM Invoice WHERE userID = ?;";
+                                                   + "FROM Invoice WHERE userID = ?;";
     
     private static String GET_INVOICE_DETAIL =  "SELECT id.productID, id.priceCode, quantity\n" +
                                                 "FROM Invoice i \n" +
@@ -81,6 +81,7 @@ public class InvoiceDAO extends BaseDAO<Invoice> {
     private void getAllInvoiceWithUserID(int userID) throws SQLException {
         openQuery(GET_INVOICE_WITH_USER_ID);
         TemporaryCart temporaryCart = TemporaryCart.createNew();
+        System.out.println("userid = [" + userID + "]");
         query.setInt(1, userID);
         ResultSet resultSet = query.executeQuery();
 

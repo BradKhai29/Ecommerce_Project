@@ -8,18 +8,13 @@ package controller;
  *
  * @author This PC
  */
-public enum SupportEnum {
-    CUSTOMER("customer"),
+public enum CookieEnum {
     REMEMBER_USER_COOKIE("rememberUser"),
-    TEMPORARY_CART_COOKIE("temporaryCart"),
-    TEMPORARY_CART("temporaryCart"),
-    COOKIE_LOGIN_CHECKPOINT("CookieLoginCheckPoint"),
-    ADD_TEMP_CART_COOKIE_CHECKPOINT("addCartCookieCheckPoint"),
-    INVOICE_HISTORY("invoices"),;
+    TEMPORARY_CART_COOKIE("temporaryCart"),;
     
     private String name;
     
-    private SupportEnum(String name) {
+    private CookieEnum(String name) {
         this.name = name;
     }
 
