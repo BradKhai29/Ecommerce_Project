@@ -71,7 +71,7 @@ public class LoginWithCookieServlet extends HttpServlet {
         //Get remember user cookie enum
         CookieEnum cookieEnum = CookieEnum.REMEMBER_USER_COOKIE;
         //Get cookieValue to reload again the remember user
-        String cookieValue = CookieSupportServlet.getCookieValue(request, cookieEnum);
+        String cookieValue = CookieSupportServlet.processCookie(request, response, cookieEnum, false);
         
         //Get remeber user from RememberUserManager
         rememberUser = RememberUserManager.get(cookieValue);

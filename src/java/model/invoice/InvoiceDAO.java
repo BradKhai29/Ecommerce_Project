@@ -80,7 +80,6 @@ public class InvoiceDAO extends BaseDAO<Invoice> {
 
     private void getAllInvoiceWithUserID(int userID) throws SQLException {
         openQuery(GET_INVOICE_WITH_USER_ID);
-        TemporaryCart temporaryCart = TemporaryCart.createNew();
         System.out.println("userid = [" + userID + "]");
         query.setInt(1, userID);
         ResultSet resultSet = query.executeQuery();
@@ -88,12 +87,17 @@ public class InvoiceDAO extends BaseDAO<Invoice> {
         //Get list of invoice first
         while (resultSet.next()) 
         {
+            //Create temporary cart to store product
+            TemporaryCart temporaryCart = TemporaryCart.createNew();
+            
             int invoiceID = resultSet.getInt("invoiceID");
             int totalMoney = resultSet.getInt("totalMoney");
             Date createAt = resultSet.getDate("createdAt");
             Invoice invoice = new Invoice(invoiceID, userID, totalMoney, createAt, temporaryCart);
-
+            
             if (!invoices.containsKey(invoiceID)) {
+                //UnComment below line to debug
+                //System.out.println("putting invoice id [" + invoiceID + "]");
                 invoices.put(invoiceID, invoice);
             }
         }
@@ -102,14 +106,15 @@ public class InvoiceDAO extends BaseDAO<Invoice> {
     }
     
     private void getProductBelongToInvoice() throws SQLException
-    {
-        openQuery(GET_INVOICE_DETAIL);
-        
-        for (Map.Entry<Integer, Invoice> invoiceEntry : invoices.entrySet()) 
+    {        
+        for (Map.Entry<Integer, Invoice> invoiceEntry : invoices.entrySet())
         {
+            //Open query for each time loading the product
+            openQuery(GET_INVOICE_DETAIL);
+            
             int invoiceID = invoiceEntry.getKey();
             Invoice invoice = invoiceEntry.getValue();
-            TemporaryCart temporaryCart = invoice.getTemporaryCart();
+            TemporaryCart invoiceTemporaryCart = invoice.getTemporaryCart();
             
             query.setInt(1, invoiceID);
             ResultSet resultSet = query.executeQuery();
@@ -121,8 +126,8 @@ public class InvoiceDAO extends BaseDAO<Invoice> {
                 int priceCode = resultSet.getInt("priceCode");
                 int quantity = resultSet.getInt("quantity");
                 
-                Product product = productDAO.get(productID, priceCode);          
-                temporaryCart.add(product, quantity);
+                Product product = productDAO.get(productID, priceCode);
+                invoiceTemporaryCart.add(product, quantity);
             }
         }
         

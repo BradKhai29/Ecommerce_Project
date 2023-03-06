@@ -37,7 +37,7 @@ public class TemporaryCartLoadServlet extends HttpServlet {
 
         Customer user = (Customer) session.getAttribute(SupportEnum.CUSTOMER.getName());
         if (user == null) {
-            processTemporaryCartCookie(request);
+            processTemporaryCartCookie(request, response);
         } else {
             processUserTemporaryCart(session, user);
         }
@@ -69,14 +69,14 @@ public class TemporaryCartLoadServlet extends HttpServlet {
         return getServletName();
     }
 
-    private void processTemporaryCartCookie(HttpServletRequest request) {
+    private void processTemporaryCartCookie(HttpServletRequest request, HttpServletResponse response) {
         HttpSession session = request.getSession(true);
 
         //Create TEMPORARY_CART_COOKIE enum
         CookieEnum cookieEnum = CookieEnum.TEMPORARY_CART_COOKIE;
         
         //get cookieValue to load again the temporaryCart
-        String cookieValue = CookieSupportServlet.getCookieValue(request, cookieEnum);
+        String cookieValue = CookieSupportServlet.processCookie(request, response, cookieEnum, false);
         
         //Load the temporaryCart from TemporaryCartManager
         Optional<TemporaryCart> temporaryCart = TemporaryCartManager.get(cookieValue);

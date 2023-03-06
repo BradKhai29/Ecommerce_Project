@@ -73,7 +73,7 @@ public class TemporaryCartSavingServlet extends HttpServlet {
     {
         //Remove the temporaryCart cookie
         CookieEnum cookieEnum = CookieEnum.TEMPORARY_CART_COOKIE;
-        String cookieValue = CookieSupportServlet.removeCookie(request, response, cookieEnum);
+        String cookieValue = CookieSupportServlet.processCookie(request, response, cookieEnum, true);
         
         //remove mapping
         TemporaryCartManager.remove(cookieValue);

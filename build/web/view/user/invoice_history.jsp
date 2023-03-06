@@ -16,11 +16,11 @@
         <h1>Invoices page</h1>
         <div class="container">
             <div class="row">
-                <c:forEach var="invoice" items="${sessionScope.invoices}">
+                <c:forEach var="invoiceEntry" items="${sessionScope.invoices}">
                     <table class="table table-success">
                         <thead>
                             <tr>
-                                <th scope="col" colspan="6">Mã hóa đơn : ${invoice.key}</th>
+                                <th scope="col" colspan="6">Mã hóa đơn : ${invoiceEntry.key}</th>
                             </tr>
                             <tr>
                                 <th scope="col">Mã sản phẩm</th>
@@ -32,17 +32,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="product" items="${invoice.value.temporaryCart.productCart}">
+                            <c:forEach var="productEntry" items="${invoiceEntry.value.temporaryCart.productCart}">
                                 <tr>   
-                                    <th scope="row">${product.key}</th>
+                                    <th scope="row">${productEntry.key}</th>
                                     <td>
-                                        <img class="img-fluid img-thumbnail w-25 h-25"src="${root}/${product.value.imgURL}" alt="productImg">
+                                        <img class="img-fluid img-thumbnail w-25 h-25"src="${root}/${productEntry.value.imgURL}" alt="productImg">
                                     </td>
-                                    <td>${product.value.productName}</td>
-                                    <td>${product.value.price}</td>
-                                    <td>${product.value.paymentQuantity}</td>
-                                    <td>${product.value.totalPrice}</td>
-                                </tr> 
+                                    <td>${productEntry.value.productName}</td>
+                                    <td>${productEntry.value.price}</td>
+                                    <td>${productEntry.value.paymentQuantity}</td>
+                                    <td>${productEntry.value.totalPrice}</td>
+                                </tr>
                             </c:forEach>
                         </tbody>
                     </table>     

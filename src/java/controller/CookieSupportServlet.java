@@ -15,8 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
- * @author This PC
+ * This Servlet will handle some function with Cookie
  */
 @WebServlet(name = "CookieSupportServlet", urlPatterns = {"/CookieSupportServlet", "/cookieSupport"})
 public class CookieSupportServlet extends HttpServlet {
@@ -38,7 +37,15 @@ public class CookieSupportServlet extends HttpServlet {
         processRequest(request, response);
     }
     
-    public static String getCookieValue(HttpServletRequest request, CookieEnum cookieEnum)
+    /**
+     * This method will process the Cookie with given CookieEnum, and return the value belong to that cookie
+     * <br>doRemove option will take action on this Cookie
+     * @param request
+     * @param cookieEnum
+     * @param doRemove If <span style="color:red">true</span>, then remove this Cookie
+     * @return 
+     */
+    public static String processCookie(HttpServletRequest request, HttpServletResponse response, CookieEnum cookieEnum, boolean doRemove)
     {
         String cookieValue = "";
         boolean isFound = false;
@@ -52,35 +59,11 @@ public class CookieSupportServlet extends HttpServlet {
             {
                 cookieValue = existCookie.getValue();
                 isFound = true;
-            }
-        }
-        
-        return cookieValue;
-    }
-    
-    /**
-     * This method will remove Cookie with given CookieEnum and return the value belong to the removed cookie
-     * @param request
-     * @param response
-     * @param cookieEnum
-     * @return CookieValue belong to removed Cookie
-     */
-    public static String removeCookie(HttpServletRequest request, HttpServletResponse response, CookieEnum cookieEnum)
-    {
-        String cookieValue = "";
-        boolean isFound = false;
-        Cookie[] cookies = request.getCookies();
-
-        for (int i = 0; i < cookies.length && !isFound; i++) {
-            Cookie existCookie = cookies[i];
-            
-            //If exist cookie with name = this cookieEnum.name, then Remove it
-            if (existCookie.getName().equals(cookieEnum.getName())) 
-            {
-                cookieValue = existCookie.getValue();
-                existCookie.setMaxAge(0);
-                response.addCookie(existCookie);
-                isFound = true;
+                if(doRemove) 
+                {
+                    existCookie.setMaxAge(0);
+                    response.addCookie(existCookie);
+                }
             }
         }
         

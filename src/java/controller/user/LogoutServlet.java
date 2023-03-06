@@ -56,7 +56,7 @@ public class LogoutServlet extends HttpServlet {
     }
 
     private void removeRememberUserCookie(HttpServletRequest request, HttpServletResponse response) {
-        CookieSupportServlet.removeCookie(request, response, CookieEnum.REMEMBER_USER_COOKIE);
+        CookieSupportServlet.processCookie(request, response, CookieEnum.REMEMBER_USER_COOKIE, true);
     }
 
 }

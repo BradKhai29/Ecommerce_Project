@@ -16,7 +16,8 @@ public enum WebPageEnum {
     LOGIN_PAGE("loginPage"),
     REGISTER_PAGE("registerPage"),
     TEMP_CART("product_cart_page"),
-    INVOICE_HISTORY("invoice_history_page");
+    INVOICE_HISTORY("invoice_history_page"),
+    USER_DETAIL("user_detail_page");
     
     private static String contextPath = "/A_Ecommerce_Project/";
     private String URL;

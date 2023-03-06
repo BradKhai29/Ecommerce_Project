@@ -20,6 +20,10 @@
         <servlet-name>InvoiceHistoryPage</servlet-name>
         <jsp-file>/view/user/invoice_history.jsp</jsp-file>
     </servlet>
+    <servlet>
+        <servlet-name>UserDetailPage</servlet-name>
+        <jsp-file>/view/user/user_detail.jsp</jsp-file>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginPage</servlet-name>
         <url-pattern>/loginPage</url-pattern>
@@ -39,6 +43,10 @@
     <servlet-mapping>
         <servlet-name>InvoiceHistoryPage</servlet-name>
         <url-pattern>/invoice_history_page</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserDetailPage</servlet-name>
+        <url-pattern>/user_detail_page</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

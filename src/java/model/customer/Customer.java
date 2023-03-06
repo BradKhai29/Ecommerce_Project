@@ -107,7 +107,7 @@ public class Customer {
     }
 
     public Map<Integer, Invoice> getInvoices() {
-        if(invoices == null) setInvoices(invoiceDAO.getAll(userID));
+        invoices = invoiceDAO.getAll(userID);
         return invoices;
     }
 

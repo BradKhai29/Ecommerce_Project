@@ -60,10 +60,12 @@ public class ProductDAO extends model.DAO.BaseDAO<Product> {
      *
      * @param productID
      * @param priceCode
-     * @return
+     * @return <span style="color:red">Product obj</span> with given ProductID and PriceCode
      */
     public Product get(int productID, int priceCode) {
         System.out.println("Getting product with given [" + productID + "], priceCode [" + priceCode + "]");
+        
+        //Create new product instances
         Product product = Product.createNew();
         product.setProductID(productID);
         openQuery(SELECT_WITH_PRODUCTID_AND_PRICECODE);

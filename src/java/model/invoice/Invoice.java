@@ -89,9 +89,4 @@ public class Invoice {
     public void setTemporaryCart(TemporaryCart temporaryCart) {
         this.temporaryCart = temporaryCart;
     }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode(); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-    }
 }
