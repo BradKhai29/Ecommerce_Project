@@ -1,5 +1,6 @@
 package controller.temporary_cart;
 
+import controller.CookieEnum;
 import model.temporary_cart.TemporaryCartManager;
 import model.temporary_cart.TemporaryCart;
 import controller.SupportEnum;
@@ -55,7 +56,7 @@ public final class TemporaryCartServlet extends HttpServlet {
         temporaryCart.add(product.get(), 1);
 
         if (isLogin) {
-            processWithLoginUser(session, temporaryCart, user);
+            processWithLoginUser(temporaryCart, user);
         } else {
             processWithoutLoginUser(session, response, temporaryCart);
         }
@@ -102,7 +103,7 @@ public final class TemporaryCartServlet extends HttpServlet {
         //Get hashcode as value for this cookie
         String cookieValue = Integer.toString(temporaryCart.hashCode());
         //Create cookie
-        Cookie temporaryCartCookie = new Cookie(SupportEnum.TEMPORARY_CART_COOKIE.getName(), cookieValue);
+        Cookie temporaryCartCookie = new Cookie(CookieEnum.TEMPORARY_CART_COOKIE.getName(), cookieValue);
         temporaryCartCookie.setMaxAge(TimeEnum.REMEMBER_USER_COOKIE_TIME.getValue());
 
         //add cookie
@@ -111,7 +112,7 @@ public final class TemporaryCartServlet extends HttpServlet {
         session.setAttribute(SupportEnum.ADD_TEMP_CART_COOKIE_CHECKPOINT.getName(), "check");
     }
 
-    private void processWithLoginUser(HttpSession session, TemporaryCart temporaryCart, Customer user) {
+    private void processWithLoginUser(TemporaryCart temporaryCart, Customer user) {
         //Add to TemporaryCart manager
         TemporaryCartManager.add(user.getUsername(), temporaryCart);
     }

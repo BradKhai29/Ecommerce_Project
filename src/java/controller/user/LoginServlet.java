@@ -1,5 +1,6 @@
 package controller.user;
 
+import controller.CookieEnum;
 import controller.SupportEnum;
 import controller.TimeEnum;
 import java.io.IOException;
@@ -82,7 +83,7 @@ public class LoginServlet extends HttpServlet {
     private void createRememberUserCookie(HttpServletResponse response, Customer customer) 
     {
         String userHashCode = Integer.toString(customer.hashCode());
-        Cookie rememberUserCookie = new Cookie(SupportEnum.REMEMBER_USER_COOKIE.getName(), userHashCode);
+        Cookie rememberUserCookie = new Cookie(CookieEnum.REMEMBER_USER_COOKIE.getName(), userHashCode);
 
         //Add this cookie to response for later retrieve
         rememberUserCookie.setMaxAge(TimeEnum.REMEMBER_USER_COOKIE_TIME.getValue());

@@ -4,6 +4,8 @@
  */
 package controller.user;
 
+import controller.CookieEnum;
+import controller.CookieSupportServlet;
 import controller.SupportEnum;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -66,25 +68,13 @@ public class LoginWithCookieServlet extends HttpServlet {
         System.out.println("processing RemberUserCookie ...");
         Optional<Customer> rememberUser = Optional.empty();
 
-        Cookie cookies[] = request.getCookies();
-        for (int i = 0; i < cookies.length; i++) 
-        {
-            Cookie existCookie = cookies[i];
-
-            //If exist rememberUserCookie, read its value to check
-            if (existCookie.getName().equals(SupportEnum.REMEMBER_USER_COOKIE.getName())) 
-            {
-                String cookieValue = existCookie.getValue();
-                rememberUser = RememberUserManager.get(cookieValue);
-
-                //Check if the remember cookie is valid or not
-                if(rememberUser.isEmpty()) 
-                {
-                    existCookie.setMaxAge(0);
-                    response.addCookie(existCookie);
-                }
-            }
-        }
+        //Get remember user cookie enum
+        CookieEnum cookieEnum = CookieEnum.REMEMBER_USER_COOKIE;
+        //Get cookieValue to reload again the remember user
+        String cookieValue = CookieSupportServlet.getCookieValue(request, cookieEnum);
+        
+        //Get remeber user from RememberUserManager
+        rememberUser = RememberUserManager.get(cookieValue);
         System.out.println("Finishing processed RemberUserCookie ...");
         return rememberUser;
     }

@@ -38,9 +38,24 @@ public class CookieSupportServlet extends HttpServlet {
         processRequest(request, response);
     }
     
-    public static void addCookieWithName(HttpServletRequest request, HttpServletResponse response, CookieEnum cookieEnum, String cookieValue)
+    public static String getCookieValue(HttpServletRequest request, CookieEnum cookieEnum)
     {
+        String cookieValue = "";
+        boolean isFound = false;
+        Cookie[] cookies = request.getCookies();
+
+        for (int i = 0; i < cookies.length && !isFound; i++) {
+            Cookie existCookie = cookies[i];
+            
+            //If exist cookie with name = this cookieEnum.name, then get its value
+            if (existCookie.getName().equals(cookieEnum.getName())) 
+            {
+                cookieValue = existCookie.getValue();
+                isFound = true;
+            }
+        }
         
+        return cookieValue;
     }
     
     /**
@@ -53,9 +68,10 @@ public class CookieSupportServlet extends HttpServlet {
     public static String removeCookie(HttpServletRequest request, HttpServletResponse response, CookieEnum cookieEnum)
     {
         String cookieValue = "";
+        boolean isFound = false;
         Cookie[] cookies = request.getCookies();
 
-        for (int i = 0; i < cookies.length; i++) {
+        for (int i = 0; i < cookies.length && !isFound; i++) {
             Cookie existCookie = cookies[i];
             
             //If exist cookie with name = this cookieEnum.name, then Remove it
@@ -64,6 +80,7 @@ public class CookieSupportServlet extends HttpServlet {
                 cookieValue = existCookie.getValue();
                 existCookie.setMaxAge(0);
                 response.addCookie(existCookie);
+                isFound = true;
             }
         }
         

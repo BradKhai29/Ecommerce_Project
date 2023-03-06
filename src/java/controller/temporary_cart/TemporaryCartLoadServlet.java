@@ -4,6 +4,8 @@
  */
 package controller.temporary_cart;
 
+import controller.CookieEnum;
+import controller.CookieSupportServlet;
 import model.temporary_cart.TemporaryCartManager;
 import model.temporary_cart.TemporaryCart;
 import controller.SupportEnum;
@@ -32,22 +34,22 @@ public class TemporaryCartLoadServlet extends HttpServlet {
         System.out.println("Served at [" + getServletInfo() + "]");
         HttpSession session = request.getSession(true);
         Object requiredLoginMessage = session.getAttribute(MessageEnum.LOGIN_REQUIRED.getName());
-        
+
         Customer user = (Customer) session.getAttribute(SupportEnum.CUSTOMER.getName());
-        if (user == null) 
-        {
+        if (user == null) {
             processTemporaryCartCookie(request);
         } else {
             processUserTemporaryCart(session, user);
         }
 
         boolean haverequiredLoginMessage = requiredLoginMessage != null;
-        
-        if(haverequiredLoginMessage) {
+
+        if (haverequiredLoginMessage) {
             session.removeAttribute(MessageEnum.LOGIN_REQUIRED.getName());
             response.sendRedirect(webpage_tools.WebPageEnum.TEMP_CART.getURL());
+        } else {
+            response.sendRedirect(webpage_tools.WebPageEnum.HOME.getURL());
         }
-        else response.sendRedirect(webpage_tools.WebPageEnum.HOME.getURL());
     }
 
     @Override
@@ -70,26 +72,27 @@ public class TemporaryCartLoadServlet extends HttpServlet {
     private void processTemporaryCartCookie(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
 
-        Cookie[] cookies = request.getCookies();
-        for (int i = 0; i < cookies.length; i++) {
-            Cookie cookie = cookies[i];
-            if (cookie.getName().equals(SupportEnum.TEMPORARY_CART_COOKIE.getName())) {
-                String cookieValue = cookie.getValue();
-                Optional<TemporaryCart> temporaryCart = TemporaryCartManager.get(cookieValue);
-                if (temporaryCart.isPresent()) {
-                    System.out.println("Exist temporary Cart");
-                    session.setAttribute(SupportEnum.TEMPORARY_CART.getName(), temporaryCart.get());
-                }
-            }
+        //Create TEMPORARY_CART_COOKIE enum
+        CookieEnum cookieEnum = CookieEnum.TEMPORARY_CART_COOKIE;
+        
+        //get cookieValue to load again the temporaryCart
+        String cookieValue = CookieSupportServlet.getCookieValue(request, cookieEnum);
+        
+        //Load the temporaryCart from TemporaryCartManager
+        Optional<TemporaryCart> temporaryCart = TemporaryCartManager.get(cookieValue);
+        
+        if (temporaryCart.isPresent()) {
+            System.out.println("Exist temporary Cart with id [" + cookieValue + ']');
+            session.setAttribute(SupportEnum.TEMPORARY_CART.getName(), temporaryCart.get());
         }
     }
 
     private void processUserTemporaryCart(HttpSession session, Customer user) {
         String username = user.getUsername();
+        //Load temporary cart with key = username
         Optional<TemporaryCart> temporaryCart = TemporaryCartManager.get(username);
-        
-        if (temporaryCart.isPresent()) 
-        {
+
+        if (temporaryCart.isPresent()) {
             System.out.println("Exist temporary Cart with key [" + username + "]");
             session.setAttribute(SupportEnum.TEMPORARY_CART.getName(), temporaryCart.get());
         }
