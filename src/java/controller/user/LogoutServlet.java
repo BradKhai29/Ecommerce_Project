@@ -16,6 +16,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.customer.Customer;
+import model.temporary_cart.TemporaryCart;
+import model.temporary_cart.TemporaryCartManager;
 
 /**
  *
@@ -26,6 +29,9 @@ public class LogoutServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("Served at [" + getServletName() + "]");
+        
+        removeTempCartIfEmpty(request);
         invalidateSession(request);
         removeRememberUserCookie(request, response);
         
@@ -47,6 +53,15 @@ public class LogoutServlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return getServletName();
+    }
+    
+    private void removeTempCartIfEmpty(HttpServletRequest request)
+    {
+        HttpSession session = request.getSession(true);
+        
+        //Get user in this session
+        Customer user = (Customer)session.getAttribute(SupportEnum.CUSTOMER.getName());
+        TemporaryCartManager.remove(user.getUsername(), true);
     }
 
     private void invalidateSession(HttpServletRequest request) {

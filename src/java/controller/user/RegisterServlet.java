@@ -65,7 +65,7 @@ public class RegisterServlet extends HttpServlet {
             session.setAttribute(message.getName(), message.getMessage());
             
             //If have required login message, send to save temporary cart servlet
-            if(haveRequiredLoginMessage) response.sendRedirect(webpage_tools.ControllerEnum.TEMP_CART_SAVE.getURL());
+            if(haveRequiredLoginMessage) response.sendRedirect(webpage_tools.ServletEnum.TEMP_CART_SAVE.getURL());
             
             //else, send user to homepage
             else response.sendRedirect(webpage_tools.WebPageEnum.ROOT.getURL());

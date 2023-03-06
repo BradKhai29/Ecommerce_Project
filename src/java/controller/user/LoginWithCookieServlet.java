@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.customer.Customer;
-import webpage_tools.ControllerEnum;
+import webpage_tools.ServletEnum;
 import webpage_tools.WebPageEnum;
 
 /**
@@ -42,7 +42,7 @@ public class LoginWithCookieServlet extends HttpServlet {
         } 
         
         //After load the User, redirect to load the temporary Cart
-        response.sendRedirect(ControllerEnum.TEMP_CART_LOAD.getURL());
+        response.sendRedirect(ServletEnum.TEMP_CART_LOAD.getURL());
     }
 
     @Override

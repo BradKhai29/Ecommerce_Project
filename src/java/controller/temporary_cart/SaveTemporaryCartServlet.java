@@ -27,7 +27,7 @@ import model.customer.Customer;
  * <br>This servlet will save that cart to cart manager with key = username
  */
 @WebServlet(name = "SaveTemporaryCartServlet", urlPatterns = {"/SaveTemporaryCartServlet", "/saveTempCart"})
-public class TemporaryCartSavingServlet extends HttpServlet {
+public class SaveTemporaryCartServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -40,7 +40,7 @@ public class TemporaryCartSavingServlet extends HttpServlet {
         {
             saveTemporaryCartByUsername(request, response, user, temporaryCart);
         }
-        response.sendRedirect(webpage_tools.ControllerEnum.TEMP_CART_LOAD.getURL());
+        response.sendRedirect(webpage_tools.ServletEnum.TEMP_CART_LOAD.getURL());
     }
 
     

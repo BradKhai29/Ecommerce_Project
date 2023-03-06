@@ -25,7 +25,7 @@ public class RootController extends HttpServlet {
             throws ServletException, IOException {
         System.out.println("Served at [" + getServletInfo() + "]");
         initURLs(request);
-        response.sendRedirect(ControllerEnum.PRODUCT_LOAD.getURL());
+        response.sendRedirect(ServletEnum.PRODUCT_LOAD.getURL());
     }
     
     private void initURLs(HttpServletRequest request)

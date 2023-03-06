@@ -8,7 +8,7 @@ package webpage_tools;
  *
  * @author This PC
  */
-public enum ControllerEnum {
+public enum ServletEnum {
     ROOT(""),
     PRODUCT_LOAD("productLoad"),
     TEMP_CART_LOAD("loadTempCart"),
@@ -21,10 +21,10 @@ public enum ControllerEnum {
     private String URL;
     
 
-    private ControllerEnum() {
+    private ServletEnum() {
     }
 
-    private ControllerEnum(String pageURL) {
+    private ServletEnum(String pageURL) {
         this.URL = pageURL;
     }
 

@@ -22,7 +22,7 @@ import webpage_tools.WebPageEnum;
  * @code This Servlet is used for create temporaryCart and send temporaryCart cookie
  */
 @WebServlet(name = "ProductCartServlet", urlPatterns = {"/ProductCartServlet", "/productCart"})
-public final class TemporaryCartServlet extends HttpServlet {
+public final class CreateTemporaryCartServlet extends HttpServlet {
 
     private static final ProductDAO productDAO;
 

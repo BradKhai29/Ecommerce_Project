@@ -20,10 +20,34 @@ public final class TemporaryCartManager {
         }
     }
     
+    /**
+     * Remove Temporary Cart belong to given key
+     * @param key 
+     */
     public static void remove(String key)
     {
         System.out.println("Remove tempcart with key [" + key + "]");
         temporaryCarts.remove(key);
+    }
+    
+    /**
+     * Remove empty temporary cart with key = username
+     * @param username
+     * @param checkEmpty 
+     */
+    public static void remove(String username, boolean checkEmpty)
+    {
+        //System.out.println("Get to Remove with CheckEmpty");
+        TemporaryCart temporaryCart = temporaryCarts.get(username);
+        if(temporaryCart != null)
+        {
+            //System.out.println("TemporaryCart found!");
+            if(temporaryCart.getSize() < 1 && checkEmpty) 
+            {
+                //System.out.println("Do Remove Empty Cart with key = [" + username + "]");
+                temporaryCarts.remove(username);
+            }
+        }
     }
     
     public static Optional<TemporaryCart> get(String key)
@@ -34,7 +58,7 @@ public final class TemporaryCartManager {
         //Get the tempCart and check if it is existed or not
         TemporaryCart tempCart = temporaryCarts.get(key);
         if(tempCart != null) {
-            System.out.println("Get tempcart with key [" + key + "]");
+            //System.out.println("Get tempcart with key [" + key + "]");
             temporaryCart = Optional.of(tempCart);
         }
         

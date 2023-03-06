@@ -27,7 +27,7 @@ import webpage_tools.MessageEnum;
  * <br>> username : if user login
  */
 @WebServlet(name = "LoadTemporaryCartServlet", urlPatterns = {"/LoadTemporaryCartServlet", "/loadTempCart"})
-public class TemporaryCartLoadServlet extends HttpServlet {
+public class LoadTemporaryCartServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

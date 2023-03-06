@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "ChangeQuantityServlet", urlPatterns = {"/ChangeQuantityServlet", "/changeQuantity"})
-public class ChangeQuantityServlet extends HttpServlet {
+public class ProcessTemporaryCartServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
