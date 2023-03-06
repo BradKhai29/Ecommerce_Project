@@ -32,15 +32,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach var="product" items="invoice.value.temporaryCart">
-                                <th scope="row">${product.key}</th>
-                                <td>
-                                    <img class="img-fluid img-thumbnail w-25 h-25"src="${root}/${product.value.imgURL}" alt="productImg">
-                                </td>
-                                <td>${product.value.productName}</td>
-                                <td>${product.value.price}</td>
-                                <td>${product.value.paymentQuantity}</td>
-                                <td>${product.value.totalPrice}</td>
+                            <c:forEach var="product" items="${invoice.value.temporaryCart.productCart}">
+                                <tr>   
+                                    <th scope="row">${product.key}</th>
+                                    <td>
+                                        <img class="img-fluid img-thumbnail w-25 h-25"src="${root}/${product.value.imgURL}" alt="productImg">
+                                    </td>
+                                    <td>${product.value.productName}</td>
+                                    <td>${product.value.price}</td>
+                                    <td>${product.value.paymentQuantity}</td>
+                                    <td>${product.value.totalPrice}</td>
+                                </tr> 
                             </c:forEach>
                         </tbody>
                     </table>     

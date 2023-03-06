@@ -74,7 +74,8 @@ public class Product {
     }
 
     public void setImgURL(String imgURL) {
-        this.imgURL = imgURL;
+        StringBuffer contextPath = new StringBuffer("product/");
+        this.imgURL = contextPath.append(imgURL).toString();
     }
 
     public int getPrice() {
@@ -137,6 +138,6 @@ public class Product {
     
     @Override
     public String toString() {
-        return ("product" + productName + ":" + productID + ":" + price + ":" + priceCode + ":" + details);
+        return ("product" + productName + ":" + productID + ":" + price + ":" + priceCode + ":" + imgURL);
     }
 }

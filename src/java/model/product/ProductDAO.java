@@ -22,18 +22,18 @@ public class ProductDAO extends model.DAO.BaseDAO<Product> {
     }
 
     private static String SELECT_ALL = "SELECT p.productID, productName, price, p.priceCode, imgURL, details, productStatus, typeID "
-                                     + "FROM Product p INNER JOIN ProductPrice pp ON p.priceCode = pp.priceCode";
+            + "FROM Product p INNER JOIN ProductPrice pp ON p.priceCode = pp.priceCode";
 
     private static String SELECT_WITH_PRODUCTID_AND_PRICECODE = "SELECT productName, price, imgURL, typeID, productStatus \n"
-                                                              + "FROM Product p INNER JOIN ProductPrice pp ON p.priceCode = pp.priceCode\n"
-                                                              + "WHERE p.productID = ? AND p.priceCode = ?";
+            + "FROM Product p INNER JOIN ProductPrice pp ON p.priceCode = pp.priceCode\n"
+            + "WHERE p.priceCode = ?";
 
     @Override
     protected void openQuery(String SQLQuery) {
         openConnection();
-        
+
         try {
-            query = DBConnection.prepareStatement(SELECT_ALL);
+            query = DBConnection.prepareStatement(SQLQuery);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -54,38 +54,45 @@ public class ProductDAO extends model.DAO.BaseDAO<Product> {
         Optional<Product> product = Optional.of(products.get(id));
         return product;
     }
-    
+
     /**
      * Get product with given productID and priceCode
+     *
      * @param productID
      * @param priceCode
-     * @return 
+     * @return
      */
     public Product get(int productID, int priceCode) {
+        System.out.println("Getting product with given [" + productID + "], priceCode [" + priceCode + "]");
         Product product = Product.createNew();
         product.setProductID(productID);
         openQuery(SELECT_WITH_PRODUCTID_AND_PRICECODE);
-        
+
         try {
-            query.setInt(1, productID);
-            query.setInt(2, priceCode);
-            
+            query.setInt(1, priceCode);
+
             ResultSet resultSet = query.executeQuery();
-            String productName = resultSet.getString("productName");
-            int price = resultSet.getInt("price");
-            String imgURL = resultSet.getString("imgURL");
-            int typeID = resultSet.getInt("typeID");
-            int productStatus = resultSet.getInt("productStatus");
             
-            product.setProductName(productName);
-            product.setPrice(price);
-            product.setImgURL(imgURL);
-            product.setTypeID(typeID);
-            product.setProductStatus(productStatus);            
+            while (resultSet.next()) 
+            {
+                String productName = resultSet.getString("productName");
+                int price = resultSet.getInt("price");
+                String imgURL = resultSet.getString("imgURL");
+                int typeID = resultSet.getInt("typeID");
+                int productStatus = resultSet.getInt("productStatus");
+
+                product.setProductName(productName);
+                product.setPrice(price);
+                product.setImgURL(imgURL);
+                product.setTypeID(typeID);
+                product.setProductStatus(productStatus);
+
+                webpage_tools.PrintTools.print(product);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        
+
         closeQuery();
         return product;
     }
