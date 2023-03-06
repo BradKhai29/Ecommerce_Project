@@ -5,18 +5,19 @@ import model.invoice.Invoice;
 import model.invoice.InvoiceDAO;
 
 public class Customer {
+    //Database Attributes section
     int userID;
     String username;
     String email;
     String passwd;
-    
     String fullname;
     String phoneNumber;
     String userAddress = "";
     
-    //bỏ thêm thằng transaction map ở đây để hỗ trợ tính năng in lịch sử
+    //In app section
     private InvoiceDAO invoiceDAO = new InvoiceDAO();
     private Map<Integer, Invoice> invoices;
+    private long totalPayAmount;
 
     public static Customer empty()
     {
@@ -113,5 +114,18 @@ public class Customer {
 
     public void setInvoices(Map<Integer, Invoice> invoices) {
         this.invoices = invoices;
+    }
+
+    public long getTotalPayAmount() {
+        int invoiceMoney = 0;
+        if(invoices == null) invoices = invoiceDAO.getAll(userID);
+        
+        for (Map.Entry<Integer, Invoice> invoiceEntry : invoices.entrySet()) {
+            Invoice invoice = invoiceEntry.getValue();
+            invoiceMoney += invoice.getTotalMoney();
+        }
+        
+        totalPayAmount = invoiceMoney;
+        return totalPayAmount;
     }
 }

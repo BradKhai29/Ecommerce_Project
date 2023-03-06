@@ -40,7 +40,7 @@
                         <tr>
                             <td>
                                 <button type="submit" name="login">Đăng nhập</button>
-                                <a href = "${root}/registerPage" id = "link-register">Đăng kí tài khoản</a>
+                                <a href = "${register}" id = "link-register">Đăng kí tài khoản</a>
                             </td>
                         </tr>
                         ${requiredLogin}

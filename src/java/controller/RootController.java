@@ -1,11 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -33,13 +28,25 @@ public class RootController extends HttpServlet {
         ServletContext application = request.getServletContext();
         application.setAttribute("root", application.getContextPath());
         
-        //Init the URLs
+        //Init the URLs for web page
         String loginPage = WebPageEnum.LOGIN_PAGE.getURL();
         String registerPage = WebPageEnum.REGISTER_PAGE.getURL();
+        String temporaryCartPage = WebPageEnum.TEMP_CART.getURL();
+        String invoicePage = WebPageEnum.INVOICE_HISTORY.getURL();
+        String userDetailPage = WebPageEnum.USER_DETAIL.getURL();
+        String productDetailPage = WebPageEnum.PRODUCT_DETAIL.getURL();
+        
+        //Init URLs for Serlvet
+        String userServlet = ServletEnum.USER.getURL();
         
         //Set URLS for applicationScope
         application.setAttribute("login", loginPage);
         application.setAttribute("register", registerPage);
+        application.setAttribute("cart", temporaryCartPage);
+        application.setAttribute("userDetail", userDetailPage);
+        application.setAttribute("productDetail", productDetailPage);
+        application.setAttribute("user", userServlet);
+        application.setAttribute("invoicePage", invoicePage);
     }
     
     @Override

@@ -62,7 +62,7 @@
                             <td></td>
                             <td>
                                 <button type="submit" name="register">Đăng ký</button> 
-                                <a href="${root}/loginPage" id="link-login">
+                                <a href="${login}" id="link-login">
                                     Login nếu đã có tài khoản
                                 </a>
                             </td>

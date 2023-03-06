@@ -23,4 +23,8 @@ public class PrintTools {
             e.printStackTrace();
         }
     }
+
+    public static String getUTF8() {
+        return UTF8;
+    }
 }

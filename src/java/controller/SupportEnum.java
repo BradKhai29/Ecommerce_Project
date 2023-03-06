@@ -13,6 +13,7 @@ public enum SupportEnum {
     TEMPORARY_CART("temporaryCart"),
     COOKIE_LOGIN_CHECKPOINT("CookieLoginCheckPoint"),
     ADD_TEMP_CART_COOKIE_CHECKPOINT("addCartCookieCheckPoint"),
+    UPDATE_PROFILE_CHECKPOINT("updateProfile"),
     INVOICE_HISTORY("invoices"),;
     
     private String name;

@@ -37,7 +37,7 @@
                             <div class="d-flex flex-row">
                                 <h2>
                                     <c:if var="test" test="${customer == null}">
-                                        <a href="${root}/loginPage" class="btn">
+                                        <a href="${login}" class="btn">
                                             <h4>Login
                                                 <span class="badge bg-light text-dark">
                                                     <i class="fa-solid fa-circle-user"></i>
@@ -51,7 +51,7 @@
                                                 ${customer.username} <i class="fa-solid fa-circle-user"></i>
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li><a class="dropdown-item" href="user_detail_page">Cài đặt tài khoản</a></li>
+                                                <li><a class="dropdown-item" href="${userDetail}">Cài đặt tài khoản</a></li>
                                                 <li><hr class="dropdown-divider"></li>
                                                 <li><a class="dropdown-item" href="invoiceHistory">Xem danh sách hóa đơn</a></li>
                                                 <li><hr class="dropdown-divider"></li>
@@ -59,7 +59,7 @@
                                             </ul>
                                         </div>
                                     </c:if>
-                                    <a href="product_cart_page">
+                                    <a href="${cart}">
                                         <span class="badge bg-secondary">Cart
                                             <i class="fa-solid fa-cart-shopping"></i>
                                             <span class="badge bg-success">${temporaryCart == null ? "0" : temporaryCart.size}</span>

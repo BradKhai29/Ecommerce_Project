@@ -15,7 +15,8 @@ public enum ServletEnum {
     TEMP_CART_SAVE("saveTempCart"),
     PAYMENT("payment"),
     LOGIN("login"),
-    INVOICE_HISTORY("invoiceHistory");
+    INVOICE_HISTORY("invoiceHistory"),
+    USER("user");
     
     private static String contextPath = "/A_Ecommerce_Project/";
     private String URL;
