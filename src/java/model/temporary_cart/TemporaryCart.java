@@ -79,11 +79,11 @@ public class TemporaryCart {
         int productID = product.getProductID();
         product.setPaymentQuantity(quantity);
         
-        if(!productCart.containsKey(productID)) 
+        if(!productCart.containsKey(productID))
         {
             productCart.put(productID, product);
+            doUpdate = true;
         }
-        doUpdate = true;
     }
     
     public void updateQuantity(int productID, int newQuantity)

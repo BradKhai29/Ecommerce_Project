@@ -16,11 +16,11 @@ public final class RememberUserManager {
     {
         //Init as empty optional
         Optional<Customer> customerOptional = Optional.empty();
-        
         Customer rememberUser = rememberCustomers.get(hashCode);
-        //If remember User is not null, then assign it to optional
-        if(rememberUser != null) {
-            System.out.println("GET HASHCODE : ["  + hashCode + "]");
+        
+        boolean isExist = rememberUser != null;
+        if(isExist) {
+            System.out.println("Get User from key : ["  + hashCode + "]");
             customerOptional = Optional.of(rememberUser);
         }
         
@@ -31,7 +31,7 @@ public final class RememberUserManager {
     {
         if(!rememberCustomers.containsKey(hashCode)) 
         {
-            System.out.println("ADDED HASHCODE : ["  + hashCode + "]");
+            System.out.println("Add User with key : ["  + hashCode + "]");
             rememberCustomers.put(hashCode, rememberUser);
         }
     }
@@ -44,7 +44,7 @@ public final class RememberUserManager {
         {
             rememberCustomers.remove(hashCode);
             removeSuccess = true;
-            System.out.println("REMOVED HASHCODE : ["  + hashCode + "]");
+            System.out.println("Remove User with key : ["  + hashCode + "]");
         }
         
         return removeSuccess;

@@ -4,7 +4,7 @@
  */
 package controller.user;
 
-import controller.SupportEnum;
+import controller.support.SupportEnum;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

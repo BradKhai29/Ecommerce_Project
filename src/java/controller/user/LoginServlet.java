@@ -1,14 +1,12 @@
 package controller.user;
 
-import controller.CookieEnum;
-import controller.SupportEnum;
-import controller.TimeEnum;
+import controller.support.CookieEnum;
+import controller.support.CookieSupportServlet;
+import controller.support.SupportEnum;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Optional;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,34 +17,46 @@ import webpage_tools.MessageEnum;
 
 /**
  *
- * This Servlet checks login information
+ * This Servlet will handle login for Application
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet", "/login"})
 public class LoginServlet extends HttpServlet {
-
     private static final CustomerDAO customerDAO;
 
     static {
         customerDAO = new CustomerDAO();
-        new HashMap<>();
     }
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Served at [" + getServletInfo() + "]");
-        request.setCharacterEncoding("UTF-8");
+        response.sendRedirect(webpage_tools.WebPageEnum.LOGIN_PAGE.getURL());
+    }
 
-        HttpSession session = request.getSession();
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processLogin(request, response);
+    }
+    
+    protected void processLogin(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        System.out.println("Served at [" + getServletInfo() + "]");
+        request.setCharacterEncoding(webpage_tools.PrintTools.getUTF8());
+
+        HttpSession session = request.getSession(true);
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String remember = request.getParameter("remember");
 
-        Optional<Customer> customer = customerDAO.authenticate(username, password);
+        Optional<Customer> customer = customerDAO.Authenticate(username, password);
+        boolean doRememeber = remember != null;
 
         if (customer.isPresent()) 
         {
-            if (remember != null) 
+            if (doRememeber) 
             {
                 createRememberUserCookie(response, customer.get());
             }
@@ -63,34 +73,13 @@ public class LoginServlet extends HttpServlet {
 
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    @Override
-    public String getServletInfo() {
-        return getServletName();
-    }
-
     private void createRememberUserCookie(HttpServletResponse response, Customer customer) 
     {
         String userHashCode = Integer.toString(customer.hashCode());
-        Cookie rememberUserCookie = new Cookie(CookieEnum.REMEMBER_USER_COOKIE.getName(), userHashCode);
-
-        //Add this cookie to response for later retrieve
-        rememberUserCookie.setMaxAge(TimeEnum.REMEMBER_USER_COOKIE_TIME.getValue());
-        response.addCookie(rememberUserCookie);
-
+        CookieSupportServlet.addCookie(response, CookieEnum.REMEMBER_USER_COOKIE, userHashCode);
         //Add this user to rememeber maps for later auto-login function with rememberUserCookie
-        if (RememberUserManager.get(userHashCode).isEmpty()) {
+        if (RememberUserManager.get(userHashCode).isEmpty())
+        {
             RememberUserManager.add(userHashCode, customer);
         }
     }

@@ -4,7 +4,7 @@
  */
 package controller.invoice;
 
-import controller.SupportEnum;
+import controller.support.SupportEnum;
 import java.io.IOException;
 import java.util.Map;
 import javax.servlet.ServletException;

@@ -1,4 +1,4 @@
-package controller;
+package controller.root;
 
 import java.io.IOException;
 import javax.servlet.ServletContext;
@@ -14,11 +14,23 @@ import webpage_tools.*;
  * @author This PC
  */
 @WebServlet(name = "RootController", urlPatterns = {"/RootController", "/root"})
-public class RootController extends HttpServlet {
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+public class RootController extends HttpServlet {    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Served at [" + getServletInfo() + "]");
+        processRequest(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        System.out.println("Served at [" + getServletName()+ "]");
         initURLs(request);
         response.sendRedirect(ServletEnum.PRODUCT_LOAD.getURL());
     }
@@ -48,22 +60,4 @@ public class RootController extends HttpServlet {
         application.setAttribute("user", userServlet);
         application.setAttribute("invoicePage", invoicePage);
     }
-    
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    @Override
-    public String getServletInfo() {
-        return getServletName();
-    }
-
 }

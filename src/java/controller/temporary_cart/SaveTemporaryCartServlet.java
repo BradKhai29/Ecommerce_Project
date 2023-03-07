@@ -4,11 +4,11 @@
  */
 package controller.temporary_cart;
 
-import controller.CookieEnum;
-import controller.CookieSupportServlet;
+import controller.support.CookieEnum;
+import controller.support.CookieSupportServlet;
 import model.temporary_cart.TemporaryCartManager;
 import model.temporary_cart.TemporaryCart;
-import controller.SupportEnum;
+import controller.support.SupportEnum;
 import java.io.IOException;
 import java.util.Optional;
 import javax.servlet.ServletException;

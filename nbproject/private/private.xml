@@ -3,10 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/controller/invoice/InvoiceHistorySevlet.java</file>
-            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/controller/SupportEnum.java</file>
+            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/webpage_tools/WebPageEnum.java</file>
+            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/controller/user/UserServlet.java</file>
+            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/model/invoice/Invoice.java</file>
+            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/controller/RootController.java</file>
+            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/web/view/user/user_detail.jsp</file>
             <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/model/customer/Customer.java</file>
-            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/web/view/user/invoice_history.jsp</file>
+            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/webpage_tools/PrintTools.java</file>
+            <file>file:/D:/Working_space/PRJ301_project/NETBEANS_ONLY/Ecommerce_Project/src/java/webpage_tools/MessageEnum.java</file>
         </group>
     </open-files>
 </project-private>

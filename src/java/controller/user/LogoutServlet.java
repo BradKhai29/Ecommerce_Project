@@ -4,9 +4,9 @@
  */
 package controller.user;
 
-import controller.CookieEnum;
-import controller.CookieSupportServlet;
-import controller.SupportEnum;
+import controller.support.CookieEnum;
+import controller.support.CookieSupportServlet;
+import controller.support.SupportEnum;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

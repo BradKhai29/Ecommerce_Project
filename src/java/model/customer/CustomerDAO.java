@@ -119,7 +119,7 @@ public class CustomerDAO extends BaseDAO<Customer> {
     public void delete(int id) {
     }
     
-    public Optional<Customer> authenticate(String inputUserName, String inputPassword)
+    public Optional<Customer> Authenticate(String inputUserName, String inputPassword)
     {
         //Declare userOptional as empty optional
         Optional<Customer> userOptional = Optional.empty();

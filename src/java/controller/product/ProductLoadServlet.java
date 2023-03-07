@@ -1,14 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 package controller.product;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,44 +13,41 @@ import model.product.ProductDAO;
 
 /**
  *
- * @author This PC
+ * This Servlet will load all products from Database to the Application
  */
 @WebServlet(name = "ProductServlet", urlPatterns = {"/ProductServlet", "/productLoad"})
-public class ProductLoadServlet extends HttpServlet {
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        System.out.println("Serve at [" + getServletName().concat("]"));
-        
-        //Get the servlet context the set products as application scope
-        ServletContext servletContext = getServletContext();    
-        //get Products from productDAO
-        Map<Integer, Product> products = new ProductDAO().getAll(true);        
-        servletContext.setAttribute("products", products);
-        
-        response.sendRedirect(webpage_tools.WebPageEnum.HOME.getURL());
-    }
-    
+public class ProductLoadServlet extends HttpServlet {    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        LoadProduct(request, response);
     }
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        LoadProduct(request, response);
     }
-
+    
     /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
+     * Load the products from Database and set it to application scope
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException 
      */
-    @Override
-    public String getServletInfo() {
-        return getServletName();
+    protected void LoadProduct(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException 
+    {
+        System.out.println("Served at [" + getServletName().concat("]"));
+        
+        //Get the servlet context
+        ServletContext application = getServletContext();    
+        //get Products from productDAO
+        Map<Integer, Product> products = new ProductDAO().getAll(true);
+        //set products as application scope
+        application.setAttribute("products", products);
+        
+        response.sendRedirect(webpage_tools.WebPageEnum.HOME.getURL());
     }
-
 }

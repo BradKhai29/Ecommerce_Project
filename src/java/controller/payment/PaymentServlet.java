@@ -4,7 +4,7 @@
  */
 package controller.payment;
 
-import controller.SupportEnum;
+import controller.support.SupportEnum;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

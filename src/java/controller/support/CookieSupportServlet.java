@@ -1,12 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
-package controller;
+package controller.support;
 
-import controller.user.RememberUserManager;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -43,6 +37,7 @@ public class CookieSupportServlet extends HttpServlet {
      * @param request
      * @param cookieEnum
      * @param doRemove If <span style="color:red">true</span>, then remove this Cookie
+     * If <span style="color:red">true</span>, no removed action
      * @return 
      */
     public static String processCookie(HttpServletRequest request, HttpServletResponse response, CookieEnum cookieEnum, boolean doRemove)
@@ -68,5 +63,13 @@ public class CookieSupportServlet extends HttpServlet {
         }
         
         return cookieValue;
+    }
+    
+    public static void addCookie(HttpServletResponse response, CookieEnum cookieEnum, String cookieValue)
+    {
+        TimeEnum timeEnum = TimeEnum.MAX_COOKIE_TIME;
+        Cookie cookie = new Cookie(cookieEnum.getName(), cookieValue);
+        cookie.setMaxAge(timeEnum.getValue());
+        response.addCookie(cookie);
     }
 }
