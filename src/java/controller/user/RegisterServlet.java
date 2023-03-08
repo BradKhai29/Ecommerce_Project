@@ -28,10 +28,22 @@ public class RegisterServlet extends HttpServlet {
     static {
         customerDAO = new CustomerDAO();
     }
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {      
-        System.out.println("Served at [" + getServletInfo() + "]");
+        System.out.println("Served at [" + getServletName()+ "]");
         HttpSession session = request.getSession(true); 
         MessageEnum message;
         
@@ -95,24 +107,7 @@ public class RegisterServlet extends HttpServlet {
             response.sendRedirect(webpage_tools.WebPageEnum.REGISTER_PAGE.getURL());
         }
     }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    @Override
-    public String getServletInfo() {
-        return getServletName();
-    }
-
+    
     public boolean checkConfirmPassword(String password, String confirmPassword) {
         return password.equals(confirmPassword);
     }

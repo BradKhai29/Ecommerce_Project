@@ -18,6 +18,7 @@ public class Customer {
     private InvoiceDAO invoiceDAO = new InvoiceDAO();
     private Map<Integer, Invoice> invoices;
     private long totalPayAmount;
+    boolean makePayment = true;
 
     public static Customer empty()
     {
@@ -108,6 +109,7 @@ public class Customer {
     }
 
     public Map<Integer, Invoice> getInvoices() {
+        System.out.println("Get invoice list from Database with Username = [" + username + "]");
         invoices = invoiceDAO.getAll(userID);
         return invoices;
     }
@@ -127,5 +129,26 @@ public class Customer {
         
         totalPayAmount = invoiceMoney;
         return totalPayAmount;
+    }
+    
+    public void MakeNewPayment()
+    {
+        makePayment = true;
+    }
+    
+    public boolean HaveNewPayment()
+    {
+        boolean result = makePayment;
+        makePayment = false;
+        
+        return result;
+    }
+    
+    public void updateProfile(String fullname, String email, String phoneNumber, String userAddress)
+    {
+        this.fullname = fullname;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.userAddress = userAddress;
     }
 }

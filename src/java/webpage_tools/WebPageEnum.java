@@ -17,20 +17,29 @@ public enum WebPageEnum {
     REGISTER_PAGE("registerPage"),
     TEMP_CART("product_cart_page"),
     INVOICE_HISTORY("invoice_history_page"),
-    USER_DETAIL("user_detail_page");
+    USER_DETAIL("user_detail_page", "user_detail.jsp"),
+    ADMIN_PAGE("admin_page");
     
     private static String contextPath = "/A_Ecommerce_Project/";
+    private String JSP_Page;
     private String URL;
-    
-    private WebPageEnum() {
-    }
+
 
     private WebPageEnum(String pageURL) {
         this.URL = pageURL;
     }
+    
+    private WebPageEnum(String pageURL, String JSP_Page) {
+        this.URL = pageURL;
+        this.JSP_Page = JSP_Page;
+    }
 
     public String getURL() {
         return contextPath.concat(URL);
+    }
+    
+    public String getPage() {
+        return contextPath.concat(JSP_Page);
     }
     
     /**
@@ -49,6 +58,18 @@ public enum WebPageEnum {
         }
             
         URLGenerater.append(this.URL);
+        return URLGenerater.toString();
+    }
+    
+    public String getPage(FolderEnum... prefixURL) {
+        StringBuffer URLGenerater = new StringBuffer(contextPath);
+        
+        for(FolderEnum prefix : prefixURL)
+        {
+            URLGenerater.append(prefix);
+        }
+            
+        URLGenerater.append(this.JSP_Page);
         return URLGenerater.toString();
     }
     

@@ -38,7 +38,7 @@ public final class TemporaryCartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println("Served at [" + getServletName()+ "]");
+        System.out.println("Served at [" + getServletName() + "]");
         
         HttpSession session = request.getSession(true);
         String addToCart = request.getParameter("addToCart");

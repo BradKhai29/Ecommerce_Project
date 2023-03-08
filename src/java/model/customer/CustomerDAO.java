@@ -21,6 +21,12 @@ public class CustomerDAO extends BaseDAO<Customer> {
     private static String SELECT_USER = "SELECT * FROM Customer WHERE userID = ?";
     private static String SELECT_USER_WITH_USERNAME = "SELECT * FROM Customer WHERE username = ?";
     private static String CHECK_EXIST_USERNAME = "SELECT username FROM Customer WHERE username = ?";
+    private static String UPDATE_PROFILE =  "UPDATE Customer \n" +
+                                            "SET fullName = ?, email = ?, phoneNumber = ?, userAddress = ? \n" +
+                                            "WHERE userID = ?;";
+    private static String UPDATE_PASSWORD = "UPDATE Customer \n" +
+                                            "SET passwd = ? \n" +
+                                            "WHERE userID = ?;";
 
     @Override
     protected void openQuery(String SQLQuery) {
@@ -96,7 +102,7 @@ public class CustomerDAO extends BaseDAO<Customer> {
             query.setString(4, customer.getEmail());
             query.setString(5, customer.getUsername());
             query.setString(6, customer.getPasswd());
-            query.execute();
+            query.executeUpdate();
             
             System.out.println("REGISTER USER SUCCESS");
         } catch (Exception e) {
@@ -113,6 +119,47 @@ public class CustomerDAO extends BaseDAO<Customer> {
 
     @Override
     public void update(int id, String... updateValue) {
+    }
+    
+    public void updateProfile(Customer user, String fullname, String email, String phoneNumber, String userAddress) 
+    {
+        openQuery(UPDATE_PROFILE);
+        int id = user.getUserID();
+        
+        try {
+            query.setString(1, fullname);
+            query.setString(2, email);
+            query.setString(3, phoneNumber);
+            query.setString(4, userAddress);
+            query.setInt(5, id);
+            
+            query.executeUpdate();
+            System.out.println("Update user [" + id + "] success");
+            user.updateProfile(fullname, email, phoneNumber, userAddress);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        closeQuery();
+    }
+    
+    public void updatePassword(Customer user, String password)
+    {
+        openQuery(UPDATE_PASSWORD);
+        int id = user.getUserID();
+        
+        try {
+            query.setString(1, password);
+            query.setInt(2, id);
+            
+            query.executeUpdate();
+            System.out.println("Update user [" + id + "] success");
+            user.setPasswd(password);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        closeQuery();
     }
 
     @Override

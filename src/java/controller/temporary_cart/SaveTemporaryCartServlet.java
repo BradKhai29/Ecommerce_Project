@@ -31,6 +31,7 @@ public class SaveTemporaryCartServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("Served at [" + getServletName() + "]");
         HttpSession session = request.getSession();
         
         Customer user = (Customer)session.getAttribute(SupportEnum.CUSTOMER.getName());
@@ -54,11 +55,6 @@ public class SaveTemporaryCartServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-    }
-
-    @Override
-    public String getServletInfo() {
-        return getServletName();
     }
 
     /**

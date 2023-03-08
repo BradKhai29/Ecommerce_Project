@@ -19,6 +19,7 @@
     </head>
     <body>
         <div class="container-fluid">
+            <a href="${adminPage}">adminPage</a>
             <div class="row">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <div class="container">
@@ -52,9 +53,9 @@
                                                 ${customer.username} <i class="fa-solid fa-circle-user"></i>
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li><a class="dropdown-item" href="${userDetail}">Cài đặt tài khoản</a></li>
+                                                <li><a class="dropdown-item" href="${user}?cancel=true">Cài đặt tài khoản</a></li>
                                                 <li><hr class="dropdown-divider"></li>
-                                                <li><a class="dropdown-item" href="invoiceHistory">Xem danh sách hóa đơn</a></li>
+                                                <li><a class="dropdown-item" href="${invoiceHistory}">Xem danh sách hóa đơn</a></li>
                                                 <li><hr class="dropdown-divider"></li>
                                                 <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
                                             </ul>

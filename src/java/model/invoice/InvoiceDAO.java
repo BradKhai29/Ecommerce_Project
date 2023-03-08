@@ -142,7 +142,7 @@ public class InvoiceDAO extends BaseDAO<Invoice> {
     @Override
     public void insert(Invoice invoice) {
         try {
-            insertToMap(invoice);
+            if (!invoices.containsKey(invoice.getInvoiceID())) invoices.put(invoice.getInvoiceID(), invoice);
             insertInvoice(invoice);
             insertInvoiceDetail(invoice);
         } catch (Exception e) {
@@ -150,12 +150,6 @@ public class InvoiceDAO extends BaseDAO<Invoice> {
         }
 
         closeQuery();
-    }
-
-    private void insertToMap(Invoice invoice) {
-        if (!invoices.containsKey(invoice.getInvoiceID())) {
-            invoices.put(invoice.getInvoiceID(), invoice);
-        }
     }
 
     private void insertInvoice(Invoice invoice) throws SQLException {

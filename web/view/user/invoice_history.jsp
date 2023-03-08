@@ -1,7 +1,7 @@
 <% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<c:if var="test" test="${sessionScope.invoices == null}">
+<c:if var="test" test="${sessionScope.customer == null}">
     <jsp:forward page="${root}"></jsp:forward>
 </c:if>
 <!DOCTYPE html>

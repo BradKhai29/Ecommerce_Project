@@ -14,7 +14,9 @@ public enum SupportEnum {
     COOKIE_LOGIN_CHECKPOINT("CookieLoginCheckPoint"),
     ADD_TEMP_CART_COOKIE_CHECKPOINT("addCartCookieCheckPoint"),
     UPDATE_PROFILE_CHECKPOINT("updateProfile"),
-    INVOICE_HISTORY("invoices"),;
+    UPDATE_PASSWORD_CHECKPOINT("updatePassword"),
+    INVOICE_HISTORY("invoices"),
+    ADD_INVOICES_HISTORY_CHECKPOINT("addInvoices");
     
     private String name;
     

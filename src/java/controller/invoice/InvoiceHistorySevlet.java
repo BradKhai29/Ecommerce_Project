@@ -18,24 +18,6 @@ import model.invoice.Invoice;
 
 @WebServlet(name = "InvoiceHistorySevlet", urlPatterns = {"/InvoiceHistorySevlet", "/invoiceHistory"})
 public class InvoiceHistorySevlet extends HttpServlet {
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        System.out.println("Served at [" + getServletName() + "]");
-        HttpSession session = request.getSession();
-        Customer user = (Customer)session.getAttribute(SupportEnum.CUSTOMER.getName());
-        
-        boolean isLogin = user != null;
-        
-        if (isLogin) {
-            Map<Integer, Invoice> invoices = user.getInvoices();
-            session.setAttribute(SupportEnum.INVOICE_HISTORY.getName(), invoices);
-            
-            response.sendRedirect(webpage_tools.WebPageEnum.INVOICE_HISTORY.getURL());
-        }
-        else response.sendRedirect(webpage_tools.WebPageEnum.HOME.getURL());
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -46,5 +28,42 @@ public class InvoiceHistorySevlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+    }
+    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        System.out.println("Served at [" + getServletName() + "]");
+        HttpSession session = request.getSession();
+        Customer user = (Customer)session.getAttribute(SupportEnum.CUSTOMER.getName());
+        
+        SupportEnum addInvoices = SupportEnum.ADD_INVOICES_HISTORY_CHECKPOINT;
+        Object addInvoiceHistory = session.getAttribute(addInvoices.getName());
+        
+        boolean isLogin = user != null;
+        boolean isAdd = addInvoiceHistory != null;
+        boolean haveNewPayment = user.HaveNewPayment();
+        
+        if (isLogin) 
+        {
+            Map<Integer, Invoice> invoices;
+            if (!isAdd) 
+            {
+                invoices = user.getInvoices();
+                session.setAttribute(SupportEnum.INVOICE_HISTORY.getName(), invoices);      
+                
+                //Add checkpoint to prevent the invoice list being duplicated in loading
+                session.setAttribute(addInvoices.getName(), "checkpoint");
+            }
+            if (isAdd) 
+            {
+                if(haveNewPayment) 
+                {
+                    invoices = user.getInvoices();
+                    session.setAttribute(SupportEnum.INVOICE_HISTORY.getName(), invoices);   
+                }
+            }
+            response.sendRedirect(webpage_tools.WebPageEnum.INVOICE_HISTORY.getURL());
+        }
+        else response.sendRedirect(webpage_tools.WebPageEnum.HOME.getURL());
     }
 }

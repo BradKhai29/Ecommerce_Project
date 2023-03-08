@@ -25,10 +25,22 @@ public class PaymentServlet extends HttpServlet {
     static {
         invoiceDAO = new InvoiceDAO();
     }
-    
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.sendRedirect(webpage_tools.WebPageEnum.HOME.getURL());
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("");
         HttpSession session = request.getSession();
         Customer user = (Customer)session.getAttribute(SupportEnum.CUSTOMER.getName());
         TemporaryCart temporaryCart = (TemporaryCart)session.getAttribute(SupportEnum.TEMPORARY_CART.getName());
@@ -47,6 +59,7 @@ public class PaymentServlet extends HttpServlet {
             session.setAttribute(message.getName(), message.getMessage());
             
             //Process the payment, create new Invoice to save to database
+            user.MakeNewPayment();
             processPayment(temporaryCart);
             temporaryCart.clear();
             
@@ -54,23 +67,6 @@ public class PaymentServlet extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    @Override
-    public String getServletInfo() {
-        return getServletName();
-    }
-    
     private void processPayment(TemporaryCart temporaryCart)
     {
         Invoice invoice = new Invoice(temporaryCart);

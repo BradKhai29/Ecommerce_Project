@@ -12,17 +12,6 @@ import javax.servlet.http.HttpSession;
 
 @WebServlet(name = "ChangeQuantityServlet", urlPatterns = {"/ChangeQuantityServlet", "/changeQuantity"})
 public class ProcessTemporaryCartServlet extends HttpServlet {
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession session = request.getSession();        
-        TemporaryCart temporaryCart = (TemporaryCart)session.getAttribute(SupportEnum.TEMPORARY_CART.getName());
-        
-        processCartAction(temporaryCart, request);
-        
-        response.sendRedirect(webpage_tools.WebPageEnum.TEMP_CART.getURL());
-    }
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -33,7 +22,18 @@ public class ProcessTemporaryCartServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("Served at [" + getServletName() + "]");
         processRequest(request, response);
+    }
+    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        HttpSession session = request.getSession();        
+        TemporaryCart temporaryCart = (TemporaryCart)session.getAttribute(SupportEnum.TEMPORARY_CART.getName());
+        
+        processCartAction(temporaryCart, request);
+        
+        response.sendRedirect(webpage_tools.WebPageEnum.TEMP_CART.getURL());
     }
     
     private void processCartAction(TemporaryCart temporaryCart, HttpServletRequest request)
