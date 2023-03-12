@@ -1,10 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model.product;
 
-import java.util.Objects;
+import java.util.Optional;
 
 /**
  *
@@ -25,8 +21,10 @@ public class Product {
     private String typeName = "";
     
     //In app attribute section
-    int paymentQuantity;
-    int totalPrice;
+    private int paymentQuantity;
+    private int totalPrice;
+    private String statusMessage = "";
+    private boolean updatePrice = false;
     
     static {
        productTypeDAO = new ProductTypeDAO();
@@ -83,7 +81,19 @@ public class Product {
     }
 
     public void setPrice(int price) {
+        updatePrice = true;
         this.price = price;
+    }
+    
+    public void confirmUpdatePrice(){
+        updatePrice = false;
+    }
+    
+    public boolean getUpdatePrice() 
+    {
+        boolean result = updatePrice;
+        confirmUpdatePrice();
+        return result;
     }
 
     public int getPriceCode() {
@@ -106,6 +116,14 @@ public class Product {
         return productStatus;
     }
 
+    public String getStatusMessage() {
+        if(statusMessage.equals("")) 
+        {
+            statusMessage = ProductStatusEnum.getStatusMessage(productStatus);
+        }
+        return statusMessage;
+    }
+
     public void setProductStatus(int productStatus) {
         this.productStatus = productStatus;
     }
@@ -119,7 +137,13 @@ public class Product {
     }
 
     public String getTypeName() {
-        if(typeName.equals("")) typeName = productTypeDAO.get(this.typeID).get().getTypeName();
+        boolean emptyTypeName = typeName.equals("");
+        
+        if(emptyTypeName) {
+            Optional<ProductType> typeOptional = Optional.empty();
+            typeOptional = productTypeDAO.get(typeID);
+            typeName = typeOptional.get().getTypeName();
+        }
         return typeName;
     }
 
@@ -139,5 +163,10 @@ public class Product {
     @Override
     public String toString() {
         return ("product" + productName + ":" + productID + ":" + price + ":" + priceCode + ":" + imgURL);
+    }
+    
+    public boolean isEmpty()
+    {
+        return productName == null || imgURL == null;
     }
 }

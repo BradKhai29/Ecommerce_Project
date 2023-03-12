@@ -6,16 +6,50 @@
         <title>PRODUCT CART Page</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="${root}/asset/home/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <style>
-            input[type="number"]::-webkit-inner-spin-button{
-                display: none;
-            }
-        </style>
     </head>
-
     <body>
+        <header class="container-fluid">
+            <div class="row">
+                <!-- Navbar -->
+                <nav class="navbar navbar-expand-lg navbar-scroll shadow-0 border-bottom border-dark">
+                    <div class="container pt-1">
+                        <div class="badge">
+                            <a href="${root}" id="icon" class="btn"><i class="fa-solid fa-cubes"></i>BLOCKY</a>
+                        </div>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav ms-auto fw-bold">
+                                <li class="nav-item fw-bold">
+                                    <a class="nav-link active" aria-current="page" href="#">Catalog</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="#">About Us</a>
+                                </li>
+                                <c:if var="test" test="${customer == null}">
+                                    <a class="btn btn-dark ms-3" href="${login}"><i class="fa-solid fa-circle-user icon"></i>Đăng nhập</a>
+                                </c:if>
+                                <c:if var="test2" test="${customer != null}">
+                                    <div class="dropdown">
+                                        <button class="btn btn-dark dropdown-toggle ms-3" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <i class="fa-solid fa-circle-user icon"></i>${customer.username} 
+                                        </button>
+                                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                            <li><a class="dropdown-item" href="${user}?cancel=true">Cài đặt tài khoản</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="${invoiceHistory}">Xem danh sách hóa đơn</a></li>
+                                            <li><hr class="dropdown-divider"></li>
+                                            <li><a class="dropdown-item" href="logout">Đăng xuất</a></li>
+                                        </ul>
+                                    </div>
+                                </c:if>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
         <div class="container-fluid">
             <div class="row">
                 <div class="container">

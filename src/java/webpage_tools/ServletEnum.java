@@ -11,6 +11,7 @@ package webpage_tools;
 public enum ServletEnum {
     ROOT(""),
     PRODUCT_LOAD("productLoad"),
+    PRODUCT("product"),
     TEMP_CART_LOAD("loadTempCart"),
     TEMP_CART_SAVE("saveTempCart"),
     PAYMENT("payment"),
@@ -20,10 +21,6 @@ public enum ServletEnum {
     
     private static String contextPath = "/A_Ecommerce_Project/";
     private String URL;
-    
-
-    private ServletEnum() {
-    }
 
     private ServletEnum(String pageURL) {
         this.URL = pageURL;

@@ -32,31 +32,30 @@ public class RootController extends HttpServlet {
     {
         System.out.println("Served at [" + getServletName()+ "]");
         initURLs(request);
-        response.sendRedirect(ServletEnum.PRODUCT_LOAD.getURL());
+        response.sendRedirect(ServletEnum.PRODUCT.getURL());
     }
     
     private void initURLs(HttpServletRequest request)
     {
         ServletContext application = request.getServletContext();
-        application.setAttribute("root", application.getContextPath());
-        
         //Init the URLs for web page
         String adminPage = WebPageEnum.ADMIN_PAGE.getURL();
         String loginPage = WebPageEnum.LOGIN_PAGE.getURL();
         String registerPage = WebPageEnum.REGISTER_PAGE.getURL();
         String temporaryCartPage = WebPageEnum.TEMP_CART.getURL();
-        String productDetailPage = WebPageEnum.PRODUCT_DETAIL.getURL();
         
         //Init URLs for Serlvet
         String invoiceHistoryServlet = ServletEnum.INVOICE_HISTORY.getURL();
         String userServlet = ServletEnum.USER.getURL();
+        String productServlet = ServletEnum.PRODUCT.getURL();
         
         //Set URLS for applicationScope
+        application.setAttribute("root", application.getContextPath());
         application.setAttribute("adminPage", adminPage);
         application.setAttribute("login", loginPage);
         application.setAttribute("register", registerPage);
         application.setAttribute("cart", temporaryCartPage);
-        application.setAttribute("productDetail", productDetailPage);
+        application.setAttribute("productServlet", productServlet);
         application.setAttribute("user", userServlet);
         application.setAttribute("invoiceHistory", invoiceHistoryServlet);
     }

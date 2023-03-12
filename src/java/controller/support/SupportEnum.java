@@ -10,6 +10,7 @@ package controller.support;
  */
 public enum SupportEnum {
     CUSTOMER("customer"),
+    REGISTER_CUSTOMER("registerUser"),
     TEMPORARY_CART("temporaryCart"),
     COOKIE_LOGIN_CHECKPOINT("CookieLoginCheckPoint"),
     ADD_TEMP_CART_COOKIE_CHECKPOINT("addCartCookieCheckPoint"),

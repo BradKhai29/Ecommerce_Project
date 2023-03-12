@@ -1,6 +1,7 @@
 package model.customer;
 
 import java.util.Map;
+import java.util.Objects;
 import model.invoice.Invoice;
 import model.invoice.InvoiceDAO;
 
@@ -68,6 +69,9 @@ public class Customer {
     }
 
     public void setEmail(String email) {
+        if (email == null || email.length() < 1) {
+            return;
+        }
         this.email = email;
     }
 
@@ -100,12 +104,9 @@ public class Customer {
     }
 
     public void setUserAddress(String userAddress) {
-        this.userAddress = userAddress;
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
+        boolean isValid = Objects.nonNull(userAddress) && !String.valueOf(userAddress).trim().isEmpty();
+        
+        if(isValid) this.userAddress = userAddress;
     }
 
     public Map<Integer, Invoice> getInvoices() {

@@ -28,6 +28,22 @@
         <servlet-name>AdminPage</servlet-name>
         <jsp-file>/view/admin/admin_page.jsp</jsp-file>
     </servlet>
+    <servlet>
+        <servlet-name>AdminLogin</servlet-name>
+        <jsp-file>/view/admin/login.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductsAdminPage</servlet-name>
+        <jsp-file>/view/admin/products.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductModifiedPage</servlet-name>
+        <jsp-file>/view/admin/product_modified.jsp</jsp-file>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateProductPage</servlet-name>
+        <jsp-file>/view/admin/create_product.jsp</jsp-file>
+    </servlet>
     <servlet-mapping>
         <servlet-name>loginPage</servlet-name>
         <url-pattern>/loginPage</url-pattern>
@@ -55,6 +71,22 @@
     <servlet-mapping>
         <servlet-name>AdminPage</servlet-name>
         <url-pattern>/admin_page</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminLogin</servlet-name>
+        <url-pattern>/admin_login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductsAdminPage</servlet-name>
+        <url-pattern>/products</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductModifiedPage</servlet-name>
+        <url-pattern>/product_modified</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateProductPage</servlet-name>
+        <url-pattern>/create_product</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

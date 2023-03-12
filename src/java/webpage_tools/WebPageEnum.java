@@ -18,7 +18,11 @@ public enum WebPageEnum {
     TEMP_CART("product_cart_page"),
     INVOICE_HISTORY("invoice_history_page"),
     USER_DETAIL("user_detail_page", "user_detail.jsp"),
-    ADMIN_PAGE("admin_page");
+    ADMIN_PAGE("admin_page"),
+    ADMIN_LOGIN("admin_login"),
+    ADMIN_SETTING_PAGE("admin_setting_page"),
+    ADMIN_PRODUCTS_PAGE("products"),
+    ADMIN_PRODUCT_MODIFIED_PAGE("product_modified");
     
     private static String contextPath = "/A_Ecommerce_Project/";
     private String JSP_Page;

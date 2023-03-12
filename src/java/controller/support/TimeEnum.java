@@ -12,7 +12,8 @@ public enum TimeEnum {
     MAX_COOKIE_TIME(TimeEnum._3DAYS),
     FULL_DAY(TimeEnum._24HOURS),
     AN_HOUR(TimeEnum._1HOUR),
-    A_30_MINUTE(1800);
+    A_30_MINUTES(30 * 60),
+    A_15_MINUTES(15 * 60);
     
     private final static int _3DAYS = 3 * 24 * 60 * 60;
     private final static int _24HOURS = 24 * 60 * 60;
